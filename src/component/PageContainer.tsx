@@ -1,4 +1,4 @@
-import { Container, ContainerProps } from "@mui/material";
+import { Box, Container, ContainerProps } from "@mui/material";
 import { BackgroundTheme } from "../type/background";
 import { useSetRecoilState } from "recoil";
 import { backgroundThemeState } from "../store/background";
@@ -20,12 +20,17 @@ export default function PageContainer({
   }, []);
 
   return (
-    <Container
-      maxWidth="xl"
-      sx={{ flexGrow: 1, paddingY: 5, overflow: "auto" }}
-      {...attributes}
+    <Box
+      sx={{
+        flexGrow: 1,
+        paddingY: 5,
+        overflow: "auto",
+        width: "100%",
+      }}
     >
-      {children}
-    </Container>
+      <Container maxWidth="xl" sx={{ height: "100%" }} {...attributes}>
+        {children}
+      </Container>
+    </Box>
   );
 }
