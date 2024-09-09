@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Background from "./component/Background";
+import NaviBar from "./component/Navibar";
+import LoginPage from "./page/LoginPage";
+import { Stack } from "@mui/material";
+import PokedexPage from "./page/PokedexPage";
+import PokemonPage from "./page/PokemonPage";
+import ProfilePage from "./page/ProfilePage";
+import NotFoundPage from "./page/NotFoundPage";
+import { RecoilRoot } from "recoil";
+import AuthCallbackPage from "./page/AuthCallbackPage";
+import DailyItemPage from "./page/DailyItemPage";
+import RootPage from "./page/RootPage";
+import BagPage from "./page/BagPage";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Stack direction="column" height="100dvh" width="100dwh">
+      <RecoilRoot>
+        <SnackbarProvider
+          maxSnack={1}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <BrowserRouter>
+            <NaviBar />
+            <Background />
+            <Routes>
+              <Route path="/" element={<RootPage />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+              <Route path="/daily-item" element={<DailyItemPage />}></Route>
+              <Route path="/profile" element={<ProfilePage />}></Route>
+              <Route path="/pokedex" element={<PokedexPage />}></Route>
+              <Route path="/pokemon" element={<PokemonPage />}></Route>
+              <Route path="/bag" element={<BagPage />}></Route>
+              <Route
+                path="/auth-callback"
+                element={<AuthCallbackPage />}
+              ></Route>
+              <Route path="*" element={<NotFoundPage />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </SnackbarProvider>
+      </RecoilRoot>
+    </Stack>
   );
 }
 
