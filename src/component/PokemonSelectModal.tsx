@@ -9,7 +9,7 @@ import usePokemons from "../hook/api/usePokemons";
 import PokemonSlot from "./PokemonSlot";
 import CloseIcon from "@mui/icons-material/Close";
 import { Pokemon } from "../type/pokemon";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface PokemonSelectModalProps {
   open?: boolean;

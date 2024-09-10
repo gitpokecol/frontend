@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Box, Typography } from "@mui/material";
 import { css } from "@emotion/react";
-import PokemonAnimatedSprite from "./PokemonAnimatedSprite";
-import { Pokemon } from "../type/pokemon";
 import { BagItem } from "../type/item";
 import PixelatedImage from "./PixelatedImage";
 import { getItemSpriteUrl } from "../util/sprite";

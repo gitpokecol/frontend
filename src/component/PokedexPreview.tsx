@@ -2,10 +2,7 @@ import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { pokemonForms, pokemonNames } from "../constant/pokemon";
 import PokemonAnimatedSprite from "./PokemonAnimatedSprite";
 import { PokedexItem } from "../type/pokedex";
-import {
-  GENDER_DIFFERENCE_ID_ON_FRONT,
-  getPokemonSpriteUrl,
-} from "../util/sprite";
+import { GENDER_DIFFERENCE_ID_ON_FRONT } from "../util/sprite";
 import MissingImage from "../asset/missing.png";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
