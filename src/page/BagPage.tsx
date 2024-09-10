@@ -22,10 +22,6 @@ export default function BagPage() {
     setSelectedBagItem(bagItems[0]);
   }, [bagItems]);
 
-  if (!selectedBagItem) {
-    return <></>;
-  }
-
   const handleCloseModal = () => {
     setOpenModal(false);
   };
@@ -48,71 +44,77 @@ export default function BagPage() {
 
   return (
     <PageContainer backgroundTheme="small">
-      <Stack
-        height="100%"
-        alignItems="center"
-        gap={10}
-        justifyContent="stretch"
-      >
-        <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
-          <Box
-            sx={{
-              background: "#56AEFF",
-              borderRadius: 2,
-              padding: 1,
-            }}
-            width={{ xs: 100, sm: 200 }}
-            height={{ xs: 100, sm: 200 }}
-          >
-            <PixelatedImage
-              width="100%"
-              src={getItemSpriteUrl(selectedBagItem.item_type)}
-              alt={selectedBagItem.name}
-            />
-          </Box>
-          <Stack
-            justifyContent="center"
-            width={{ xs: 200, sm: 300 }}
-            // alignItems="center"
-            gap={1}
-          >
-            <Typography fontSize={{ xs: 18, sm: 25 }}>
-              {selectedBagItem.name}
-            </Typography>
-            <Typography fontSize={{ xs: 12, sm: 15 }}>
-              {selectedBagItem.description}
-            </Typography>
-            <BoxButton onClick={() => setOpenModal(true)}>Use Item</BoxButton>
-          </Stack>
+      {bagItems ? (
+        <Stack height="100%" alignItems="center" paddingTop={10}>
+          <Typography>You doesn't have any items</Typography>
         </Stack>
-        <Grid
-          container
-          alignContent="flex-start"
-          spacing={2}
-          width={700}
-          maxWidth="100%"
-          overflow="auto"
-          height={0}
-          flexGrow={1}
+      ) : (
+        <Stack
+          height="100%"
+          alignItems="center"
+          gap={10}
+          justifyContent="stretch"
         >
-          {bagItems.map((bagItem) => (
-            <Grid
-              key={bagItem.item_type}
-              item
-              xs={3}
-              sm={1.5}
-              height="fit-content"
+          <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
+            <Box
+              sx={{
+                background: "#56AEFF",
+                borderRadius: 2,
+                padding: 1,
+              }}
+              width={{ xs: 100, sm: 200 }}
+              height={{ xs: 100, sm: 200 }}
             >
-              <ItemSlot
-                bagItem={bagItem}
-                onSelect={() => {
-                  setSelectedBagItem(bagItem);
-                }}
+              <PixelatedImage
+                width="100%"
+                src={getItemSpriteUrl(selectedBagItem.item_type)}
+                alt={selectedBagItem.name}
               />
-            </Grid>
-          ))}
-        </Grid>
-      </Stack>
+            </Box>
+            <Stack
+              justifyContent="center"
+              width={{ xs: 200, sm: 300 }}
+              // alignItems="center"
+              gap={1}
+            >
+              <Typography fontSize={{ xs: 18, sm: 25 }}>
+                {selectedBagItem.name}
+              </Typography>
+              <Typography fontSize={{ xs: 12, sm: 15 }}>
+                {selectedBagItem.description}
+              </Typography>
+              <BoxButton onClick={() => setOpenModal(true)}>Use Item</BoxButton>
+            </Stack>
+          </Stack>
+          <Grid
+            container
+            alignContent="flex-start"
+            spacing={2}
+            width={700}
+            maxWidth="100%"
+            overflow="auto"
+            height={0}
+            flexGrow={1}
+          >
+            {bagItems.map((bagItem) => (
+              <Grid
+                key={bagItem.item_type}
+                item
+                xs={3}
+                sm={1.5}
+                height="fit-content"
+              >
+                <ItemSlot
+                  bagItem={bagItem}
+                  onSelect={() => {
+                    setSelectedBagItem(bagItem);
+                  }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Stack>
+      )}
       <PokemonSelectModal
         open={openModal}
         onClose={handleCloseModal}

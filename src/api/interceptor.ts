@@ -14,9 +14,9 @@ export function checkAndSetToken(config: InternalAxiosRequestConfig) {
 }
 
 export function handleTokenError(error: AxiosError) {
-  const { status } = error.response;
+  if (!error.response) throw error;
 
-  console.log(error);
+  const { status } = error.response;
 
   if (status === 401) {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
