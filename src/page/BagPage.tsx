@@ -44,7 +44,7 @@ export default function BagPage() {
 
   return (
     <PageContainer backgroundTheme="small">
-      {bagItems ? (
+      {!selectedBagItem ? (
         <Stack height="100%" alignItems="center" paddingTop={10}>
           <Typography>You doesn't have any items</Typography>
         </Stack>
