@@ -178,7 +178,7 @@ export default function ProfilePage() {
             <Stack marginLeft={2}>
               <Typography fontSize={12}>Html</Typography>
               <CodeBlock
-                code={`<a href="https://github.com/${username}/github-pokemon-collection">
+                code={`<a href="https://app.gitpokecol.org">
     <img src="${url}" alt="${username}'s GitHub Pokemon Collection"/>
 </a>`}
               />
