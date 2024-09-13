@@ -105,7 +105,7 @@ export default function NaviBar() {
           </Box>
           <IconButton
             sx={{ height: "100%", display: { xs: "none", sm: "block" } }}
-            href="https://github.com/2jun0/github-pokemon-collection"
+            href="https://github.com/gitpokecol/github-pokemon-collection"
           >
             <GitHub />
           </IconButton>
