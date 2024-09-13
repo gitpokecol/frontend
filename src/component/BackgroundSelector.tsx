@@ -47,51 +47,32 @@ export default function BackgroundSelector({
       exclusive
       onChange={onSelect_}
       aria-label="back ground"
+      sx={{ width: "100%" }}
     >
-      <ToggleButton value="abyss" aria-label="abyss">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={abyssImage}
-          alt="abyss"
-        />
+      <ToggleButton value="abyss" aria-label="abyss" sx={{ width: "14%" }}>
+        <img src={abyssImage} alt="abyss" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="badlands" aria-label="badlands">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={badlandsImage}
-          alt="badlands"
-        />
+      <ToggleButton
+        value="badlands"
+        aria-label="badlands"
+        sx={{ width: "14%" }}
+      >
+        <img src={badlandsImage} alt="badlands" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="beach" aria-label="beach">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={beachImage}
-          alt="beach"
-        />
+      <ToggleButton value="beach" aria-label="beach" sx={{ width: "14%" }}>
+        <img src={beachImage} alt="beach" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="cave" aria-label="cave">
-        <img style={{ flexGrow: 1, maxWidth: 80 }} src={caveImage} alt="cave" />
+      <ToggleButton value="cave" aria-label="cave" sx={{ width: "14%" }}>
+        <img src={caveImage} alt="cave" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="desert" aria-label="desert">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={desertImage}
-          alt="desert"
-        />
+      <ToggleButton value="desert" aria-label="desert" sx={{ width: "14%" }}>
+        <img src={desertImage} alt="desert" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="normal" aria-label="normal">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={normalImage}
-          alt="normal"
-        />
+      <ToggleButton value="normal" aria-label="normal" sx={{ width: "14%" }}>
+        <img src={normalImage} alt="normal" style={{ maxWidth: "100%" }} />
       </ToggleButton>
-      <ToggleButton value="plain" aria-label="plain">
-        <img
-          style={{ flexGrow: 1, maxWidth: 80 }}
-          src={plainImage}
-          alt="plain"
-        />
+      <ToggleButton value="plain" aria-label="plain" sx={{ width: "14%" }}>
+        <img src={plainImage} alt="plain" style={{ maxWidth: "100%" }} />
       </ToggleButton>
     </ToggleBackgroundButtonGroup>
   );

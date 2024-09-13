@@ -45,11 +45,18 @@ export default function ProfilePage() {
 
   return (
     <PageContainer backgroundTheme="small">
-      <Stack width="100%" alignItems="center" gap={5}>
+      <Stack
+        width={900}
+        maxWidth={"100%"}
+        marginX={"auto"}
+        alignItems="center"
+        gap={5}
+      >
         <Stack direction={{ xs: "column", md: "row" }} gap={5}>
           <PixelatedImage
             style={{
-              width: "fit-content",
+              width,
+              height,
               border: "1px solid black",
               borderRadius: 5,
             }}
@@ -156,7 +163,7 @@ export default function ProfilePage() {
             </Stack>
           </Stack>
         </Stack>
-        <Box width={900} maxWidth="100%">
+        <Box maxWidth="100%">
           <Stack border={1} sx={{ background: "#FFFFFF" }} padding={3} gap={3}>
             <Typography>
               You can copy and paste the following text into your GitHub profile
