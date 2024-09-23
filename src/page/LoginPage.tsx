@@ -29,7 +29,7 @@ export default function LoginPage() {
         <ClosePokeball style={{ width: "345px", maxWidth: "70%" }} />
         <BoxButton sx={{ gap: 2 }} onClick={redirectToGithubLoginPage}>
           <Github />
-          CONTINUE WITH GITHUB!
+          <Typography>CONTINUE WITH GITHUB!</Typography>
         </BoxButton>
       </Stack>
     </PageContainer>

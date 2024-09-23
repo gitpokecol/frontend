@@ -10,7 +10,9 @@ export default function ItemAquiredPage() {
     <PageContainer backgroundTheme="grey">
       <Stack justifyContent="center" alignItems="center" height="100%" gap={10}>
         <Typography>THIS IS NOT THE PAGE YOU'RE LOOKING FOR.</Typography>
-        <BoxButton onClick={() => navigate("/")}>GO TO MAIN PAGE</BoxButton>
+        <BoxButton onClick={() => navigate("/")}>
+          <Typography>GO TO MAIN PAGE</Typography>
+        </BoxButton>
       </Stack>
     </PageContainer>
   );

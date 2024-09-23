@@ -32,9 +32,9 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
       <Typography
         textAlign="center"
         position="absolute"
-        right={1}
+        right={2}
         bottom={1}
-        fontSize={12}
+        fontSize={20}
       >
         {bagItem.count}
       </Typography>

@@ -10,10 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import { ReactComponent as Logo } from "../asset/logo.svg";
+import logoImage from "../asset/logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GitHub } from "@mui/icons-material";
+import PixelatedImage from "./PixelatedImage";
 
 const pages = ["PROFILE", "POKEDEX", "POKEMON", "BAG"];
 
@@ -89,7 +91,8 @@ export default function NaviBar() {
             sx={{ margin: 0, padding: 0, minWidth: "fit-content" }}
             onClick={() => navigate("/")}
           >
-            <Logo />
+            <PixelatedImage src={logoImage} alt="logo" />
+            {/* <Logo /> */}
           </Button>
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
             {pages.map((page) => (
@@ -99,7 +102,7 @@ export default function NaviBar() {
                 onClick={() => handleSelectPage(page)}
                 sx={{ mx: 1, my: 1, color: "black", display: "block" }}
               >
-                {page}
+                <Typography>{page}</Typography>
               </Button>
             ))}
           </Box>

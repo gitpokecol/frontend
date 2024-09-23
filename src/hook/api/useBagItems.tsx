@@ -4,7 +4,7 @@ import { getBagItems } from "../../api/apis";
 import { itemDescriptions, ItemNames } from "../../constant/items";
 
 export default function useBagItems() {
-  const [bagItems, setBagItems] = useState<BagItem[]>([]);
+  const [bagItems, setBagItems] = useState<BagItem[]>(null);
 
   const fetchBagItems = async () => {
     const res = await getBagItems();

@@ -65,11 +65,11 @@ export default function DailyItemPage() {
                   disabled={replaced}
                   onClick={onReplaceItem}
                 >
-                  REPLACE
+                  <Typography>REPLACE</Typography>
                 </BoxButton>
               </Tooltip>
               <BoxButton startIcon={<CheckIcon />} onClick={onClaimItem}>
-                CLAIM
+                <Typography>CLAIM</Typography>
               </BoxButton>
             </Stack>
           </>
@@ -84,7 +84,9 @@ export default function DailyItemPage() {
                 maxWidth: "70%",
               }}
             />
-            <BoxButton onClick={() => navigate("/pokemon")}>GO HOME</BoxButton>
+            <BoxButton onClick={() => navigate("/pokemon")}>
+              <Typography>GO HOME</Typography>
+            </BoxButton>
           </>
         )}
       </Stack>

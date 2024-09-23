@@ -19,7 +19,7 @@ export default function BagPage() {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    setSelectedBagItem(bagItems[0]);
+    if (bagItems) setSelectedBagItem(bagItems[0]);
   }, [bagItems]);
 
   const handleCloseModal = () => {
@@ -42,9 +42,12 @@ export default function BagPage() {
     return res.is_used;
   };
 
+  if (!bagItems || !selectedBagItem) {
+    return <PageContainer backgroundTheme="small"></PageContainer>;
+  }
   return (
     <PageContainer backgroundTheme="small">
-      {!selectedBagItem ? (
+      {bagItems.length === 0 ? (
         <Stack height="100%" alignItems="center" paddingTop={10}>
           <Typography>You doesn't have any items</Typography>
         </Stack>
@@ -58,7 +61,8 @@ export default function BagPage() {
           <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
             <Box
               sx={{
-                background: "#56AEFF",
+                background: "white",
+                border: "1px solid gray",
                 borderRadius: 2,
                 padding: 1,
               }}
@@ -71,19 +75,16 @@ export default function BagPage() {
                 alt={selectedBagItem.name}
               />
             </Box>
-            <Stack
-              justifyContent="center"
-              width={{ xs: 200, sm: 300 }}
-              // alignItems="center"
-              gap={1}
-            >
-              <Typography fontSize={{ xs: 18, sm: 25 }}>
+            <Stack justifyContent="center" width={{ xs: 200, sm: 300 }} gap={1}>
+              <Typography fontSize={{ xs: 25, sm: 30 }}>
                 {selectedBagItem.name}
               </Typography>
-              <Typography fontSize={{ xs: 12, sm: 15 }}>
+              <Typography fontSize={{ xs: 20, sm: 20 }}>
                 {selectedBagItem.description}
               </Typography>
-              <BoxButton onClick={() => setOpenModal(true)}>Use Item</BoxButton>
+              <BoxButton onClick={() => setOpenModal(true)}>
+                <Typography>Use Item</Typography>
+              </BoxButton>
             </Stack>
           </Stack>
           <Grid

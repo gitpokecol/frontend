@@ -4,7 +4,7 @@ import { PokedexItem } from "../../type/pokedex";
 import { pokemonIds } from "../../constant/pokemon";
 
 export default function usePokedex(): PokedexItem[] {
-  const [pokedexItems, setPokedexItems] = useState<PokedexItem[]>([]);
+  const [pokedexItems, setPokedexItems] = useState<PokedexItem[]>(null);
 
   useEffect(() => {
     getPokedex().then((res) => {

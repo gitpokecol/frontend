@@ -36,9 +36,9 @@ export default function CodeBlock({ code }: CodeBlockProps) {
         sx={{ padding: 0, height: "fit-content", minWidth: "fit-content" }}
       >
         {copied ? (
-          <Check sx={{ margin: 1, fill: "#636c76" }} />
+          <Check sx={{ margin: 1, fontSize: 30, fill: "#636c76" }} />
         ) : (
-          <ContentCopy sx={{ margin: 1, fill: "#636c76" }} />
+          <ContentCopy sx={{ margin: 1, fontSize: 30, fill: "#636c76" }} />
         )}
       </Button>
     </Stack>

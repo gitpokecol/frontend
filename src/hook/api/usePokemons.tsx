@@ -3,7 +3,7 @@ import { Pokemon } from "../../type/pokemon";
 import { getPokemons } from "../../api/apis";
 
 export default function usePokemons() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>(null);
 
   const fetchPokemons = async () => {
     const res = await getPokemons();

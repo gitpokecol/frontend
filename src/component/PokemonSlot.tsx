@@ -51,7 +51,7 @@ const PokemonSlot = forwardRef(
           position="absolute"
           width="100%"
           marginTop={-1}
-          fontSize={9}
+          fontSize={20}
         >
           Lv {pokemon.level}
         </Typography>

@@ -17,6 +17,10 @@ export default function PokedexPage() {
     setSelectedPokedexItem(pokedexItem);
   };
 
+  if (!pokedexItems) {
+    return <PageContainer backgroundTheme="small"></PageContainer>;
+  }
+
   return (
     <PageContainer backgroundTheme="small">
       <Stack

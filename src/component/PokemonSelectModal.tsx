@@ -36,6 +36,16 @@ export function PokemonSelectModal({
     }
   };
 
+  if (!pokemons)
+    return (
+      <Dialog
+        open={open}
+        onClose={onClose}
+        maxWidth="md"
+        scroll="paper"
+      ></Dialog>
+    );
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" scroll="paper">
       <DialogTitle>Select a Pokemon to use item on.</DialogTitle>
