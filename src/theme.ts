@@ -13,8 +13,9 @@ const theme = createTheme({
     },
   },
   typography: {
+    fontSize: 30,
     fontFamily: [
-      "PublicPixel",
+      "pokemon-ds",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',
@@ -26,6 +27,30 @@ const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
+  },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          textShadow: "1px 1px #c2c2c2",
+          lineHeight: 1,
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fontSize: "1.5rem",
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: "1px dashed #e0e0e0",
+        },
+      },
+    },
   },
 });
 

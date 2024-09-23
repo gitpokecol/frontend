@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "PublicPixel";
-  src: url("./font/PublicPixel.ttf");
+  font-family: "pokemon-ds";
+  src: url("./font/pokemon-ds.ttf");
 }
 
 body {
   margin: 0;
-  font-family: "PublicPixel", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: "pokemon-ds", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
