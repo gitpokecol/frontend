@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Pokemon } from "../type/pokemon";
 import PokemonAnimatedSprite from "../component/PokemonAnimatedSprite";
 import PokemonDetail from "../component/PokemonDetail";
+import { pokemonBackgroundColors } from "../constant/pokemon";
 
 export default function PokemonPage() {
   const { pokemons } = usePokemons();
@@ -34,7 +35,7 @@ export default function PokemonPage() {
         >
           <Box
             sx={{
-              background: "white",
+              background: pokemonBackgroundColors[selectedPokemon.id],
               border: "1px solid gray",
               borderRadius: 2,
               padding: 1,
