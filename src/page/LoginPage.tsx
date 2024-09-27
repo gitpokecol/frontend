@@ -4,8 +4,10 @@ import { ReactComponent as Github } from "../asset/github.svg";
 import BoxButton from "../component/BoxButton";
 import PageContainer from "../component/PageContainer";
 import useGithubLogin from "../hook/api/useGithubAuth";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const { loginUrl } = useGithubLogin();
 
   const redirectToGithubLoginPage = () => {
@@ -29,7 +31,7 @@ export default function LoginPage() {
         <ClosePokeball style={{ width: "345px", maxWidth: "70%" }} />
         <BoxButton sx={{ gap: 2 }} onClick={redirectToGithubLoginPage}>
           <Github />
-          <Typography>CONTINUE WITH GITHUB!</Typography>
+          <Typography>{t("login.continue-with-github")}</Typography>
         </BoxButton>
       </Stack>
     </PageContainer>

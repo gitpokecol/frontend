@@ -16,6 +16,7 @@ const theme = createTheme({
     fontSize: 30,
     fontFamily: [
       "pokemon-ds",
+      "PokePT_Wansung",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI"',

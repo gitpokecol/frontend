@@ -10,13 +10,15 @@ import BoxButton from "../component/BoxButton";
 import { PokemonSelectModal } from "../component/PokemonSelectModal";
 import { Pokemon } from "../type/pokemon";
 import { postUseItem } from "../api/apis";
-import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
+import useAlert from "../hook/useAlert";
 
 export default function BagPage() {
+  const { t } = useTranslation();
   const { bagItems, fetchBagItems } = useBagItems();
   const [selectedBagItem, setSelectedBagItem] = useState<BagItem | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const { enqueueSnackbar } = useSnackbar();
+  const alert = useAlert();
 
   useEffect(() => {
     if (bagItems) setSelectedBagItem(bagItems[0]);
@@ -36,7 +38,7 @@ export default function BagPage() {
       handleCloseModal();
       fetchBagItems();
     } else {
-      enqueueSnackbar("Can not use item.", { variant: "error" });
+      alert(t("bag.use-item-failed"), "error");
     }
 
     return res.is_used;
@@ -49,7 +51,7 @@ export default function BagPage() {
     <PageContainer backgroundTheme="small">
       {bagItems.length === 0 ? (
         <Stack height="100%" alignItems="center" paddingTop={10}>
-          <Typography>You doesn't have any items</Typography>
+          <Typography>{t("bag.no-items")}</Typography>
         </Stack>
       ) : (
         <Stack
@@ -72,18 +74,18 @@ export default function BagPage() {
               <PixelatedImage
                 width="100%"
                 src={getItemSpriteUrl(selectedBagItem.item_type)}
-                alt={selectedBagItem.name}
+                alt={t(`item-name.${selectedBagItem.item_type}`)}
               />
             </Box>
             <Stack justifyContent="center" width={{ xs: 200, sm: 300 }} gap={1}>
               <Typography fontSize={{ xs: 25, sm: 30 }}>
-                {selectedBagItem.name}
+                {t(`item-name.${selectedBagItem.item_type}`)}
               </Typography>
               <Typography fontSize={{ xs: 20, sm: 20 }}>
-                {selectedBagItem.description}
+                {t(`item-description.${selectedBagItem.item_type}`)}
               </Typography>
               <BoxButton onClick={() => setOpenModal(true)}>
-                <Typography>Use Item</Typography>
+                <Typography>{t("bag.use-item")}</Typography>
               </BoxButton>
             </Stack>
           </Stack>

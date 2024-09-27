@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
 import { getPokemonSpriteUrl } from "../util/sprite";
-import { pokemonNames } from "../constant/pokemon";
 import PixelatedImage from "./PixelatedImage";
 import { Pokemon } from "../type/pokemon";
+import { useTranslation } from "react-i18next";
 
 interface PokemonAnimatedSpriteProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -35,6 +35,8 @@ export default function PokemonAnimatedSprite({
   facing,
   ...attributes
 }: PokemonAnimatedSpriteProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <PixelatedImage
@@ -56,7 +58,7 @@ export default function PokemonAnimatedSprite({
             pokemon.form
           )
         )}
-        alt={pokemonNames[pokemon.id] + "'s sprite"}
+        alt={t(`pokemon-name.${pokemon.id}`) + "'s sprite"}
         {...attributes}
       />
     </>

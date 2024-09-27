@@ -11,8 +11,10 @@ import { SUBSTITUTE_DAILY_ITEM } from "../constant/items";
 import { useState } from "react";
 import { abtainDailyItem } from "../api/apis";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function DailyItemPage() {
+  const { t } = useTranslation();
   const { dailyItemType, canClaim } = useDailyItem();
   const [replaced, setReplaced] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ export default function DailyItemPage() {
         {canClaim ? (
           <>
             <Typography textAlign="center" variant="h5">
-              DAILY ITEM ACQUIRED!
+              {t("daily-item.daily-item-aquired")}
             </Typography>
             <ItemPokeBall
               itemType={dailyItemType}
@@ -65,18 +67,18 @@ export default function DailyItemPage() {
                   disabled={replaced}
                   onClick={onReplaceItem}
                 >
-                  <Typography>REPLACE</Typography>
+                  <Typography>{t("daily-item.replace")}</Typography>
                 </BoxButton>
               </Tooltip>
               <BoxButton startIcon={<CheckIcon />} onClick={onClaimItem}>
-                <Typography>CLAIM</Typography>
+                <Typography>{t("daily-item.claim")}</Typography>
               </BoxButton>
             </Stack>
           </>
         ) : (
           <>
             <Typography textAlign="center" variant="h5">
-              DAILY ITEM ALREADY ACQUIRED!
+              {t("daily-item.daily-item-already-aquired")}
             </Typography>
             <EmptyPokeBall
               style={{
@@ -85,7 +87,7 @@ export default function DailyItemPage() {
               }}
             />
             <BoxButton onClick={() => navigate("/pokemon")}>
-              <Typography>GO HOME</Typography>
+              <Typography>{t("daily-item.go-home")}</Typography>
             </BoxButton>
           </>
         )}

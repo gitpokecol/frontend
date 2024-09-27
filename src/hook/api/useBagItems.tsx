@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BagItem } from "../../type/item";
 import { getBagItems } from "../../api/apis";
-import { itemDescriptions, ItemNames } from "../../constant/items";
 
 export default function useBagItems() {
   const [bagItems, setBagItems] = useState<BagItem[]>(null);
@@ -11,8 +10,6 @@ export default function useBagItems() {
     const bagItems_ = res.items.map((item) => ({
       item_type: item.item_type,
       count: item.count,
-      name: ItemNames[item.item_type],
-      description: itemDescriptions[item.item_type],
     }));
 
     setBagItems(bagItems_);

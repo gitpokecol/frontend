@@ -7,13 +7,15 @@ import {
   Typography,
 } from "@mui/material";
 import { Pokemon } from "../type/pokemon";
-import { pokemonNames } from "../constant/pokemon";
+import { useTranslation } from "react-i18next";
 
 interface PokemonDetailProps {
   pokemon: Pokemon;
 }
 
 export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
+  const { t } = useTranslation();
+
   return (
     <Stack
       justifyContent="center"
@@ -33,7 +35,7 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
         <TableBody>
           <TableRow>
             <TableCell>
-              <Typography>Dex Id</Typography>
+              <Typography>{t("pokemon-detail.dex-id")}</Typography>
             </TableCell>
             <TableCell align="right">
               <Typography color="#3D96FF">{pokemon.id}</Typography>
@@ -41,17 +43,17 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
           </TableRow>
           <TableRow>
             <TableCell>
-              <Typography>Name</Typography>
+              <Typography>{t("pokemon-detail.name")}</Typography>
             </TableCell>
             <TableCell align="right">
               <Typography color="#3D96FF">
-                {pokemonNames[pokemon.id]}
+                {t(`pokemon-name.${pokemon.id}`)}
               </Typography>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              <Typography>Level</Typography>
+              <Typography>{t("pokemon-detail.level")}</Typography>
             </TableCell>
             <TableCell align="right">
               <Typography>
@@ -62,10 +64,12 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
           {pokemon.gender ? (
             <TableRow>
               <TableCell>
-                <Typography>Gender</Typography>
+                <Typography>{t("pokemon-detail.gender")}</Typography>
               </TableCell>
               <TableCell align="right">
-                <Typography color="#3D96FF">{pokemon.gender}</Typography>
+                <Typography color="#3D96FF">
+                  {t(`pokemon-detail.${pokemon.gender}`)}
+                </Typography>
               </TableCell>
             </TableRow>
           ) : (

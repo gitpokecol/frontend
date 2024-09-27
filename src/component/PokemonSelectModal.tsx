@@ -10,6 +10,7 @@ import PokemonSlot from "./PokemonSlot";
 import CloseIcon from "@mui/icons-material/Close";
 import { Pokemon } from "../type/pokemon";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface PokemonSelectModalProps {
   open?: boolean;
@@ -22,6 +23,7 @@ export function PokemonSelectModal({
   onClose,
   onSelect,
 }: PokemonSelectModalProps) {
+  const { t } = useTranslation();
   const { pokemons, fetchPokemons } = usePokemons();
   const pokemonSlotRefs = useRef<Record<number, any>>({});
 
@@ -48,7 +50,7 @@ export function PokemonSelectModal({
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" scroll="paper">
-      <DialogTitle>Select a Pokemon to use item on.</DialogTitle>
+      <DialogTitle>{t("pokemon-select.title")}</DialogTitle>
       <IconButton
         aria-label="close"
         onClick={onClose}

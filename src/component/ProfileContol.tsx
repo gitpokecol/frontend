@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import BackgroundSelector from "./BackgroundSelector";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ProfileControlProps {
   onChangeBackground: (value: string) => void;
@@ -26,6 +27,7 @@ export default function ProfileControl({
   onChangeWidth,
   onChangeHeight,
 }: ProfileControlProps) {
+  const { t } = useTranslation();
   const [width, setWidth] = useState<number>(300);
   const [height, setHeight] = useState<number>(250);
 
@@ -35,13 +37,13 @@ export default function ProfileControl({
       sx={{ background: "#FFFFFF" }}
       border={1}
       borderRadius={2}
-      padding={3}
+      padding={{ xs: 2, sm: 3 }}
     >
       <Table padding="none">
         <TableBody>
           <TableRow>
-            <TableCell>
-              <Typography>Background</Typography>
+            <TableCell sx={{ minWidth: { xs: 50, sm: 100 } }}>
+              <Typography>{t("profile.background")}</Typography>
             </TableCell>
             <TableCell align="right" colSpan={2} sx={{ paddingLeft: 1 }}>
               <BackgroundSelector onSelect={onChangeBackground} />
@@ -49,7 +51,7 @@ export default function ProfileControl({
           </TableRow>
           <TableRow>
             <TableCell>
-              <Typography>Facing</Typography>
+              <Typography>{t("profile.facing")}</Typography>
             </TableCell>
             <TableCell align="right" colSpan={2}>
               <RadioGroup
@@ -62,22 +64,22 @@ export default function ProfileControl({
                 <FormControlLabel
                   value="left"
                   control={<Radio />}
-                  label="left"
+                  label={t("profile.left")}
                 />
                 <FormControlLabel
                   value="right"
                   control={<Radio />}
-                  label="right"
+                  label={t("profile.right")}
                 />
               </RadioGroup>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell rowSpan={2}>
-              <Typography>Size</Typography>
+              <Typography>{t("profile.size")}</Typography>
             </TableCell>
-            <TableCell sx={{ width: 100 }}>
-              <Typography>width</Typography>
+            <TableCell sx={{ width: 70 }}>
+              <Typography>{t("profile.width")}</Typography>
             </TableCell>
             <TableCell align="right">
               <span style={{ fontSize: 20, color: "#3D96FF", lineHeight: 0.5 }}>
@@ -107,7 +109,7 @@ export default function ProfileControl({
           </TableRow>
           <TableRow>
             <TableCell>
-              <Typography>height</Typography>
+              <Typography>{t("profile.height")}</Typography>
             </TableCell>
             <TableCell align="right">
               <span style={{ fontSize: 20, color: "#3D96FF", lineHeight: 0.5 }}>

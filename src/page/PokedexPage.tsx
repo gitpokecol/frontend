@@ -3,12 +3,13 @@ import PokedexListButton from "../component/PokedexListButton";
 import PageContainer from "../component/PageContainer";
 import usePokedex from "../hook/api/usePokedex";
 
-import { pokemonNames } from "../constant/pokemon";
 import { useState } from "react";
 import { PokedexItem } from "../type/pokedex";
 import PokedexPreview from "../component/PokedexPreview";
+import { useTranslation } from "react-i18next";
 
 export default function PokedexPage() {
+  const { t } = useTranslation();
   const pokedexItems = usePokedex();
   const [selectedPokedexItem, setSelectedPokedexItem] =
     useState<PokedexItem | null>(null);
@@ -48,7 +49,7 @@ export default function PokedexPage() {
             >
               <PokedexListButton
                 number={pokedexItem.id}
-                name={pokemonNames[pokedexItem.id]}
+                name={t(`pokemon-name.${pokedexItem.id}`)}
                 hasFound={pokedexItem.isFound}
               />
             </ListItem>

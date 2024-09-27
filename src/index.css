@@ -1,13 +1,19 @@
 @font-face {
+  font-family: "PokePT_Wansung";
+  src: url("./font/PokePT_Wansung.woff2") format("woff2"),
+}
+
+@font-face {
   font-family: "pokemon-ds";
-  src: url("./font/pokemon-ds.ttf");
+  src: url("./font/pokemon-ds.woff") format("woff"),
+       url("./font/pokemon-ds.ttf") format("truetype");
 }
 
 body {
   margin: 0;
-  font-family: "pokemon-ds", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'pokemon-ds', 'PokePT_Wansung', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; 
 }

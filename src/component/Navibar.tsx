@@ -6,6 +6,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -14,10 +15,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { GitHub } from "@mui/icons-material";
-
-const pages = ["PROFILE", "POKEDEX", "POKEMON", "BAG"];
+import { useTranslation } from "react-i18next";
+import NaviLanguageSelector from "./NaviLanguageSelector";
 
 export default function NaviBar() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -48,67 +50,108 @@ export default function NaviBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", sm: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", sm: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleSelectPage(page)}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Button
-            color="secondary"
-            sx={{ margin: 0, padding: 0, minWidth: "fit-content" }}
-            onClick={() => navigate("/")}
+          <Box
+            sx={{
+              width: "100%",
+              display: { xs: "flex", sm: "none" },
+              alignItems: "center",
+            }}
           >
-            <Logo />
-          </Button>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
-            {pages.map((page) => (
+            <Box sx={{ flexGrow: 1 }}>
+              <IconButton
+                size="large"
+                aria-label="menu"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", sm: "none" },
+                }}
+              >
+                <MenuItem onClick={() => handleSelectPage("profile")}>
+                  <Typography textAlign="center">{t("nav.profile")}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => handleSelectPage("pokemon")}>
+                  <Typography textAlign="center">{t("nav.pokemon")}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => handleSelectPage("pokedex")}>
+                  <Typography textAlign="center">{t("nav.pokedex")}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => handleSelectPage("bag")}>
+                  <Typography textAlign="center">{t("nav.bag")}</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+            <NaviLanguageSelector />
+          </Box>
+          <Box
+            sx={{
+              width: "100%",
+              display: { xs: "none", sm: "flex" },
+              alignItems: "center",
+            }}
+          >
+            <IconButton onClick={() => navigate("/")}>
+              <Logo />
+            </IconButton>
+            <Stack sx={{ flexGrow: 1 }} direction="row">
               <Button
                 color="secondary"
-                key={page}
-                onClick={() => handleSelectPage(page)}
+                key={t("nav.profile")}
+                onClick={() => handleSelectPage("profile")}
                 sx={{ mx: 1, my: 1, color: "black", display: "block" }}
               >
-                <Typography>{page}</Typography>
+                <Typography>{t("nav.profile")}</Typography>
               </Button>
-            ))}
+              <Button
+                color="secondary"
+                key={t("nav.pokemon")}
+                onClick={() => handleSelectPage("pokemon")}
+                sx={{ mx: 1, my: 1, color: "black", display: "block" }}
+              >
+                <Typography>{t("nav.pokemon")}</Typography>
+              </Button>
+
+              <Button
+                color="secondary"
+                key={t("nav.pokedex")}
+                onClick={() => handleSelectPage("pokedex")}
+                sx={{ mx: 1, my: 1, color: "black", display: "block" }}
+              >
+                <Typography>{t("nav.pokedex")}</Typography>
+              </Button>
+              <Button
+                color="secondary"
+                key={t("nav.bag")}
+                onClick={() => handleSelectPage("bag")}
+                sx={{ mx: 1, my: 1, color: "black", display: "block" }}
+              >
+                <Typography>{t("nav.bag")}</Typography>
+              </Button>
+            </Stack>
+            <NaviLanguageSelector />
+            <IconButton href="https://github.com/gitpokecol/github-pokemon-collection">
+              <GitHub />
+            </IconButton>
           </Box>
-          <IconButton
-            sx={{ display: { xs: "none", sm: "inline-flex" } }}
-            href="https://github.com/gitpokecol/github-pokemon-collection"
-          >
-            <GitHub />
-          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

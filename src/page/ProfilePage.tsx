@@ -5,8 +5,10 @@ import CodeBlock from "../component/CodeBlock";
 import { useEffect, useState } from "react";
 import useUsername from "../hook/useUsername";
 import ProfileControl from "../component/ProfileContol";
+import { useTranslation } from "react-i18next";
 
 export default function ProfilePage() {
+  const { t } = useTranslation();
   const username = useUsername();
 
   const [background, setBackground] = useState<string>("none");
@@ -41,6 +43,12 @@ export default function ProfilePage() {
         marginX={"auto"}
         alignItems="center"
         gap={5}
+        sx={{
+          "& .MuiTypography-root, span": {
+            xs: { fontSize: 20 },
+            sm: { fontSize: 30 },
+          },
+        }}
       >
         <Stack
           direction={{ xs: "column", md: width > 500 ? "column" : "row" }}
@@ -51,6 +59,7 @@ export default function ProfilePage() {
             style={{
               maxWidth: "100%",
               objectFit: "contain",
+              minWidth: width,
               width,
               height,
               border: "1px solid black",
@@ -74,10 +83,7 @@ export default function ProfilePage() {
             gap={3}
             borderRadius={2}
           >
-            <Typography>
-              You can copy and paste the following text into your GitHub profile
-              or anywhere on the internet to show off your Pokemon!
-            </Typography>
+            <Typography>{t("profile.detail-1")}</Typography>
             <Stack marginLeft={2}>
               <Typography>Markdown</Typography>
               <CodeBlock

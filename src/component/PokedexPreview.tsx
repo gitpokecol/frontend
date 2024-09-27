@@ -1,5 +1,5 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { pokemonForms, pokemonNames } from "../constant/pokemon";
+import { pokemonForms } from "../constant/pokemon";
 import PokemonAnimatedSprite from "./PokemonAnimatedSprite";
 import { PokedexItem } from "../type/pokedex";
 import { GENDER_DIFFERENCE_ID_ON_FRONT } from "../util/sprite";
@@ -9,12 +9,15 @@ import MaleIcon from "@mui/icons-material/Male";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface PokedexPreviewProps {
   pokedexItem?: PokedexItem;
 }
 
 export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
+  const { t } = useTranslation();
+
   const forms =
     pokedexItem && pokemonForms[pokedexItem.id]
       ? pokemonForms[pokedexItem.id]
@@ -42,7 +45,7 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
       {pokedexItem && pokedexItem.isFound ? (
         <>
           <Typography textAlign="center" variant="h5">
-            {pokemonNames[pokedexItem.id]}
+            {t(`pokemon-name.${pokedexItem.id}`)}
           </Typography>
           <Stack position="relative" alignItems="center">
             <PokemonAnimatedSprite
@@ -70,7 +73,9 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
                   <ChevronLeftIcon />
                 </IconButton>
                 <Typography marginY="auto">
-                  {forms[formIdx] ? forms[formIdx].toUpperCase() : "DEFAULT"}
+                  {forms[formIdx]
+                    ? t(`pokemon-form.${forms[formIdx]}`)
+                    : t("pokemon-form.default")}
                 </Typography>
                 <IconButton onClick={handleNextForm}>
                   <ChevronRightIcon />
