@@ -47,18 +47,18 @@ export default function PokedexListButton({
   return (
     <>
       {hasFound ? (
-        <FoundPokedexListButton>
+        <FoundPokedexListButton fullWidth>
           <Pokeball style={{ maxWidth: 32, minWidth: 24 }} />
           <ListItemText
-            sx={{ textAlign: "left", width: 300, maxWidth: "100%" }}
+            sx={{ textAlign: "left" }}
             primary={`${numberPart} ${name}`}
           />
         </FoundPokedexListButton>
       ) : (
-        <NotFoundPokedexListButton>
-          <DisablePokeball style={{ maxWidth: 32, minWidth: 32 }} />
+        <NotFoundPokedexListButton fullWidth>
+          <DisablePokeball style={{ maxWidth: 32, minWidth: 24 }} />
           <ListItemText
-            sx={{ textAlign: "left", width: 300, maxWidth: "100%" }}
+            sx={{ textAlign: "left" }}
             primary={`${numberPart} ???`}
           />
         </NotFoundPokedexListButton>

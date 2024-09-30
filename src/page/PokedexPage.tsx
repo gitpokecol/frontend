@@ -25,7 +25,7 @@ export default function PokedexPage() {
   return (
     <PageContainer backgroundTheme="small">
       <Stack
-        direction={{ sm: "column", md: "row" }}
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="center"
         alignItems="center"
         height="100%"
@@ -38,12 +38,20 @@ export default function PokedexPage() {
         <PokedexPreview pokedexItem={selectedPokedexItem} />
         <List
           sx={{
-            maxHeight: 300,
+            width: 300,
+            maxWidth: "100%",
+            maxHeight: 400,
             overflow: "auto",
+            background: "#FFFFFF",
+            border: "1px solid gray",
+            borderRadius: 2,
+            padding: 2,
           }}
         >
           {pokedexItems.map((pokedexItem) => (
             <ListItem
+              sx={{ width: "100%" }}
+              disablePadding
               key={pokedexItem.id}
               onClick={() => onSelectPokedexItem(pokedexItem)}
             >

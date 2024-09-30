@@ -1,5 +1,5 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { pokemonForms } from "../constant/pokemon";
+import { pokemonBackgroundColors, pokemonForms } from "../constant/pokemon";
 import PokemonAnimatedSprite from "./PokemonAnimatedSprite";
 import { PokedexItem } from "../type/pokedex";
 import { GENDER_DIFFERENCE_ID_ON_FRONT } from "../util/sprite";
@@ -41,15 +41,30 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
   }, [pokedexItem]);
 
   return (
-    <Box sx={{ width: 400, maxWidth: "100%" }}>
+    <Box
+      sx={{
+        width: 300,
+        maxWidth: "100%",
+      }}
+    >
       {pokedexItem && pokedexItem.isFound ? (
         <>
           <Typography textAlign="center" variant="h5">
             {t(`pokemon-name.${pokedexItem.id}`)}
           </Typography>
-          <Stack position="relative" alignItems="center">
+          <Stack
+            position="relative"
+            alignItems="center"
+            sx={{
+              background: pokemonBackgroundColors[pokedexItem.id],
+              border: "1px solid gray",
+              borderRadius: 2,
+            }}
+          >
             <PokemonAnimatedSprite
-              style={{ minWidth: "100%" }}
+              style={{
+                minWidth: "100%",
+              }}
               pokemon={{
                 internalId: 0,
                 level: 0,
@@ -67,7 +82,7 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
                 bottom={0}
                 direction="row"
                 justifyContent="center"
-                sx={{ background: "#F5F5F5CA", borderRadius: 2 }}
+                sx={{ background: "#FFFFFF70", borderRadius: 2 }}
               >
                 <IconButton onClick={handleBeforeForm}>
                   <ChevronLeftIcon />
@@ -90,7 +105,10 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
                 position="absolute"
                 right={0}
                 top={0}
-                sx={{ background: "#F5F5F5CA", borderRadius: 2 }}
+                sx={{
+                  background: "#FFFFFF70",
+                  borderRadius: 2,
+                }}
               >
                 <IconButton onClick={() => setGender("male")}>
                   <MaleIcon sx={{ fill: "#42a5f5" }} />
@@ -109,7 +127,15 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
           <Typography textAlign="center" variant="h5">
             ???
           </Typography>
-          <Stack position="relative" alignItems="center">
+          <Stack
+            position="relative"
+            alignItems="center"
+            sx={{
+              background: "#c7c7c7",
+              border: "1px solid gray",
+              borderRadius: 2,
+            }}
+          >
             <img
               style={{ width: "100%", imageRendering: "pixelated" }}
               src={MissingImage}
