@@ -1,3 +1,5 @@
+import { getCurrentTime } from "./time";
+
 export const GENDER_DIFFERENCE_ID_ON_FRONT = [
   3, 12, 19, 20, 25, 26, 41, 42, 44, 45, 64, 65, 84, 85, 97, 111, 112, 118, 119,
   123, 129, 130, 154, 165, 166, 178, 185, 186, 190, 194, 195, 198, 202, 203,
@@ -21,6 +23,14 @@ export function getPokemonSpriteUrl(
 ) {
   // public/sprite/pokemon/{id}_{facing}_shiny_{gender}_{form}_{frame}.png
   let url = `${process.env.PUBLIC_URL}/sprite/pokemon/${id}_${facing}_`;
+
+  if (id === 421 && facing === "front") {
+    if (getCurrentTime() === "day") {
+      form = "shiny";
+    } else {
+      form = "overcast";
+    }
+  }
 
   if (isShiny) {
     url += "shiny_";
