@@ -31,7 +31,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     setUrl(
-      `https://gitpokecol.org/pokemons/${username}?face=${facing}&width=${width}&height=${height}&background=${background}`
+      `${process.env.REACT_APP_API_HOST}/pokemons/${username}?face=${facing}&width=${width}&height=${height}&background=${background}`
     );
   }, [width, height, facing, background, username]);
 
@@ -93,7 +93,7 @@ export default function ProfilePage() {
             <Stack marginLeft={2}>
               <Typography>Html</Typography>
               <CodeBlock
-                code={`<a href="https://app.gitpokecol.org">
+                code={`<a href="${process.env.REACT_APP_FRONTEND_HOST}">
     <img src="${url}" alt="${username}'s GitHub Pokemon Collection"/>
 </a>`}
               />
