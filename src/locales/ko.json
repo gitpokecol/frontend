@@ -6,6 +6,11 @@
         "bag": "가방"
     },
     "loading": "로딩중...",
+    "startup": {
+        "waking": "서버를 깨우고 있습니다.",
+        "cannotWake": "현재 서버를 깨울 수 없습니다."
+    },
+    "retry": "다시 시도",
     "notfound": {
         "detail-1": "찾으시는 페이지가 아닌 것 같습니다.",
         "go-main": "메인 페이지로"

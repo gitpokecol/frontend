@@ -6,6 +6,11 @@
         "bag": "BAG"
     },
     "loading": "Loading...",
+    "startup": {
+        "waking": "Waking server...",
+        "cannotWake": "Unable to wake the server right now."
+    },
+    "retry": "Retry",
     "notfound": {
         "detail-1": "THIS IS NOT THE PAGE YOU'RE LOOKING FOR.",
         "go-main": "GO TO MAIN PAGE"
