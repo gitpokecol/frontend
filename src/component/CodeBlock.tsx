@@ -1,6 +1,7 @@
 import { Button, Stack } from "@mui/material";
 import { useState } from "react";
 import { Check, ContentCopy } from "@mui/icons-material";
+import { PIXEL_BORDER_COLOR } from "../style/pixel";
 
 interface CodeBlockProps {
   code: string;
@@ -18,7 +19,14 @@ export default function CodeBlock({ code }: CodeBlockProps) {
   };
 
   return (
-    <Stack direction="row" sx={{ background: "#F5F5F5", borderRadius: 1 }}>
+    <Stack
+      direction="row"
+      sx={{
+        background: "#F5F5F5",
+        border: `2px solid ${PIXEL_BORDER_COLOR}`,
+        borderRadius: "6px",
+      }}
+    >
       <pre
         style={{
           overflow: "auto",
