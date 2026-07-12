@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Skeleton, Stack } from "@mui/material";
 import PokemonSlot from "../component/PokemonSlot";
 import PageContainer from "../component/PageContainer";
 import usePokemons from "../hook/api/usePokemons";
@@ -7,9 +7,9 @@ import { Pokemon } from "../type/pokemon";
 import PokemonAnimatedSprite from "../component/PokemonAnimatedSprite";
 import PokemonDetail from "../component/PokemonDetail";
 import { pokemonBackgroundColors } from "../constant/pokemon";
-import Loader from "../component/Loader";
 import ErrorState from "../component/ErrorState";
 import EmptyState from "../component/EmptyState";
+import SlotGridSkeleton from "../component/SlotGridSkeleton";
 import { useTranslation } from "react-i18next";
 
 export default function PokemonPage() {
@@ -21,10 +21,48 @@ export default function PokemonPage() {
     if (pokemons && pokemons.length > 0) setSelectedPokemon(pokemons[0]);
   }, [pokemons]);
 
-  if (loading) {
+  if (loading || (pokemons && pokemons.length > 0 && !selectedPokemon)) {
     return (
       <PageContainer backgroundTheme="small">
-        <Loader />
+        <Stack
+          height="100%"
+          alignItems="center"
+          gap={10}
+          justifyContent="stretch"
+          aria-busy="true"
+        >
+          <Stack
+            direction={{ xs: "row", sm: "row" }}
+            gap={{ xs: 2, sm: 10 }}
+            alignItems="center"
+          >
+            <Skeleton
+              variant="rectangular"
+              sx={{
+                width: { xs: 100, sm: 200 },
+                height: { xs: 100, sm: 200 },
+                borderRadius: 2,
+              }}
+            />
+            <Stack width={{ xs: 150, sm: 300 }} gap={1}>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Skeleton key={i} sx={{ fontSize: { xs: 20, sm: 30 } }} />
+              ))}
+            </Stack>
+          </Stack>
+          <Grid
+            container
+            alignContent="flex-start"
+            spacing={2}
+            width={700}
+            maxWidth="100%"
+            overflow="hidden"
+            height={0}
+            flexGrow={1}
+          >
+            <SlotGridSkeleton />
+          </Grid>
+        </Stack>
       </PageContainer>
     );
   }
@@ -46,11 +84,7 @@ export default function PokemonPage() {
   }
 
   if (!selectedPokemon) {
-    return (
-      <PageContainer backgroundTheme="small">
-        <Loader />
-      </PageContainer>
-    );
+    return <PageContainer backgroundTheme="small"></PageContainer>;
   }
 
   return (

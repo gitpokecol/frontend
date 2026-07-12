@@ -4,6 +4,8 @@ import { css } from "@emotion/react";
 import { BagItem } from "../type/item";
 import PixelatedImage from "./PixelatedImage";
 import { getItemSpriteUrl } from "../util/sprite";
+import useImagePreload from "../hook/useImagePreload";
+import SquareSkeleton from "./SquareSkeleton";
 
 const spriteStyling = css({});
 
@@ -13,6 +15,13 @@ interface ItemSlotProps {
 }
 
 export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
+  const spriteUrl = getItemSpriteUrl(bagItem.item_type);
+  const loaded = useImagePreload(spriteUrl);
+
+  if (!loaded) {
+    return <SquareSkeleton borderRadius={3} />;
+  }
+
   return (
     <Box
       position="relative"
@@ -41,7 +50,7 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
       <PixelatedImage
         style={{ width: "100%" }}
         onClick={onSelect}
-        src={getItemSpriteUrl(bagItem.item_type)}
+        src={spriteUrl}
         css={spriteStyling}
         alt={"item"}
       />

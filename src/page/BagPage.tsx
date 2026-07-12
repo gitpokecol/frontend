@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Skeleton, Stack, Typography } from "@mui/material";
 import PageContainer from "../component/PageContainer";
 import useBagItems from "../hook/api/useBagItems";
 import ItemSlot from "../component/ItemSlot";
@@ -12,8 +12,8 @@ import { Pokemon } from "../type/pokemon";
 import { postUseItem } from "../api/apis";
 import { useTranslation } from "react-i18next";
 import useAlert from "../hook/useAlert";
-import Loader from "../component/Loader";
 import ErrorState from "../component/ErrorState";
+import SlotGridSkeleton from "../component/SlotGridSkeleton";
 
 export default function BagPage() {
   const { t } = useTranslation();
@@ -53,7 +53,44 @@ export default function BagPage() {
   if (loading) {
     return (
       <PageContainer backgroundTheme="small">
-        <Loader />
+        <Stack
+          height="100%"
+          alignItems="center"
+          gap={10}
+          justifyContent="stretch"
+          aria-busy="true"
+        >
+          <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
+            <Skeleton
+              variant="rectangular"
+              sx={{
+                width: { xs: 100, sm: 200 },
+                height: { xs: 100, sm: 200 },
+                borderRadius: 2,
+              }}
+            />
+            <Stack width={{ xs: 200, sm: 300 }} gap={1}>
+              <Skeleton sx={{ fontSize: { xs: 25, sm: 30 } }} />
+              <Skeleton sx={{ fontSize: 20 }} />
+              <Skeleton
+                variant="rectangular"
+                sx={{ height: 40, borderRadius: 1 }}
+              />
+            </Stack>
+          </Stack>
+          <Grid
+            container
+            alignContent="flex-start"
+            spacing={2}
+            width={700}
+            maxWidth="100%"
+            overflow="hidden"
+            height={0}
+            flexGrow={1}
+          >
+            <SlotGridSkeleton />
+          </Grid>
+        </Stack>
       </PageContainer>
     );
   }
