@@ -1,4 +1,4 @@
-import { Box, Input, Stack, Typography } from "@mui/material";
+import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import PixelatedImage from "../component/PixelatedImage";
 import PageContainer from "../component/PageContainer";
 import CodeBlock from "../component/CodeBlock";
@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const [height, setHeight] = useState<number>(250);
   const [facing, setFacing] = useState<"left" | "right">("left");
   const [url, setUrl] = useState<string>();
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const handleWidthChange = (newValue: number) => {
     setWidth(newValue);
@@ -30,6 +31,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    setImageLoaded(false);
     setUrl(
       `${process.env.REACT_APP_API_HOST}/pokemons/${username}?face=${facing}&width=${width}&height=${height}&background=${background}`
     );
@@ -55,19 +57,38 @@ export default function ProfilePage() {
           alignItems="center"
           gap={5}
         >
-          <PixelatedImage
-            style={{
-              maxWidth: "100%",
-              objectFit: "contain",
-              minWidth: width,
-              width,
-              height,
-              border: "1px solid black",
-              borderRadius: 5,
-            }}
-            src={url}
-            alt="github pokemon profile"
-          />
+          <Box position="relative" maxWidth="100%">
+            {!imageLoaded && (
+              <Skeleton
+                variant="rectangular"
+                aria-busy="true"
+                sx={{
+                  maxWidth: "100%",
+                  minWidth: width,
+                  width,
+                  height,
+                  border: "1px solid black",
+                  borderRadius: "5px",
+                  boxSizing: "border-box",
+                }}
+              />
+            )}
+            <PixelatedImage
+              style={{
+                maxWidth: "100%",
+                objectFit: "contain",
+                minWidth: width,
+                width,
+                height,
+                border: "1px solid black",
+                borderRadius: 5,
+                display: imageLoaded ? undefined : "none",
+              }}
+              src={url}
+              onLoad={() => setImageLoaded(true)}
+              alt="github pokemon profile"
+            />
+          </Box>
           <ProfileControl
             onChangeBackground={handleBackgroundChange}
             onChangeFacing={setFacing}

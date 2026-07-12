@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
+import { Skeleton } from "@mui/material";
 import { getPokemonSpriteUrl } from "../util/sprite";
 import PixelatedImage from "./PixelatedImage";
 import { Pokemon } from "../type/pokemon";
 import { useTranslation } from "react-i18next";
+import useImagePreload from "../hook/useImagePreload";
 
 interface PokemonAnimatedSpriteProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -37,30 +39,43 @@ export default function PokemonAnimatedSprite({
 }: PokemonAnimatedSpriteProps) {
   const { t } = useTranslation();
 
-  return (
-    <>
-      <PixelatedImage
-        css={pokemonAnimatedSpriteStyling(
-          getPokemonSpriteUrl(
-            pokemon.id,
-            facing,
-            pokemon.isShiny,
-            1,
-            pokemon.gender,
-            pokemon.form
-          ),
-          getPokemonSpriteUrl(
-            pokemon.id,
-            facing,
-            pokemon.isShiny,
-            2,
-            pokemon.gender,
-            pokemon.form
-          )
-        )}
-        alt={t(`pokemon-name.${pokemon.id}`) + "'s sprite"}
-        {...attributes}
+  const firstImage = getPokemonSpriteUrl(
+    pokemon.id,
+    facing,
+    pokemon.isShiny,
+    1,
+    pokemon.gender,
+    pokemon.form
+  );
+  const secondImage = getPokemonSpriteUrl(
+    pokemon.id,
+    facing,
+    pokemon.isShiny,
+    2,
+    pokemon.gender,
+    pokemon.form
+  );
+  const loaded = useImagePreload(firstImage, secondImage);
+
+  if (!loaded) {
+    return (
+      <Skeleton
+        variant="rectangular"
+        sx={{
+          width: "100%",
+          height: attributes.height ?? "auto",
+          aspectRatio: attributes.height ? undefined : "1 / 1",
+          borderRadius: 2,
+        }}
       />
-    </>
+    );
+  }
+
+  return (
+    <PixelatedImage
+      css={pokemonAnimatedSpriteStyling(firstImage, secondImage)}
+      alt={t(`pokemon-name.${pokemon.id}`) + "'s sprite"}
+      {...attributes}
+    />
   );
 }

@@ -1,4 +1,4 @@
-import { List, ListItem, Stack } from "@mui/material";
+import { List, ListItem, Skeleton, Stack } from "@mui/material";
 import PokedexListButton from "../component/PokedexListButton";
 import PageContainer from "../component/PageContainer";
 import usePokedex from "../hook/api/usePokedex";
@@ -7,8 +7,8 @@ import { useState } from "react";
 import { PokedexItem } from "../type/pokedex";
 import PokedexPreview from "../component/PokedexPreview";
 import { useTranslation } from "react-i18next";
-import Loader from "../component/Loader";
 import ErrorState from "../component/ErrorState";
+import SquareSkeleton from "../component/SquareSkeleton";
 
 export default function PokedexPage() {
   const { t } = useTranslation();
@@ -23,7 +23,42 @@ export default function PokedexPage() {
   if (loading) {
     return (
       <PageContainer backgroundTheme="small">
-        <Loader />
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="center"
+          alignItems="center"
+          height="100%"
+          maxWidth="100%"
+          spacing={{ xs: 1, sm: 2, md: 4 }}
+          paddingTop={{ sm: 2, md: 0 }}
+          paddingLeft={2}
+          paddingRight={2}
+          aria-busy="true"
+        >
+          <Stack width={300} maxWidth="100%" gap={1}>
+            <Skeleton sx={{ fontSize: 30, width: "60%", marginX: "auto" }} />
+            <SquareSkeleton />
+          </Stack>
+          <Stack
+            width={300}
+            maxWidth="100%"
+            maxHeight={400}
+            gap={2}
+            sx={{
+              background: "#FFFFFF",
+              border: "1px solid gray",
+              borderRadius: 2,
+              padding: 2,
+            }}
+          >
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Stack key={i} direction="row" gap={2} alignItems="center">
+                <Skeleton variant="circular" width={28} height={28} />
+                <Skeleton sx={{ fontSize: 20, flexGrow: 1 }} />
+              </Stack>
+            ))}
+          </Stack>
+        </Stack>
       </PageContainer>
     );
   }

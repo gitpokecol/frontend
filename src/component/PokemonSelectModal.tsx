@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Pokemon } from "../type/pokemon";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Loader from "./Loader";
+import SlotGridSkeleton from "./SlotGridSkeleton";
 
 interface PokemonSelectModalProps {
   open?: boolean;
@@ -64,8 +64,16 @@ export function PokemonSelectModal({
       </IconButton>
       <DialogContent dividers>
         {loading || !pokemons ? (
-          <Grid container width={700} maxWidth="100%" minHeight={120}>
-            <Loader />
+          <Grid
+            container
+            alignContent="flex-start"
+            spacing={2}
+            width={700}
+            maxWidth="100%"
+            paddingX={1}
+            aria-busy="true"
+          >
+            <SlotGridSkeleton />
           </Grid>
         ) : (
           <Grid
