@@ -11,6 +11,12 @@
         "cannotWake": "현재 서버를 깨울 수 없습니다."
     },
     "retry": "다시 시도",
+    "error": {
+        "generic": "문제가 발생했습니다."
+    },
+    "empty": {
+        "no-pokemon": "아직 보유한 포켓몬이 없습니다."
+    },
     "notfound": {
         "detail-1": "찾으시는 페이지가 아닌 것 같습니다.",
         "go-main": "메인 페이지로"

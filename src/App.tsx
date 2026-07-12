@@ -17,7 +17,7 @@ import RequireAuth from "./component/RequireAuth";
 
 function App() {
   return (
-    <Stack direction="column" height="100dvh" width="100dwh">
+    <Stack direction="column" height="100dvh" width="100vw">
       <RecoilRoot>
         <SnackbarProvider
           maxSnack={1}

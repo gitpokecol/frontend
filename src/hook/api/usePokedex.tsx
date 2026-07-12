@@ -3,11 +3,16 @@ import { getPokedex } from "../../api/apis";
 import { PokedexItem } from "../../type/pokedex";
 import { pokemonIds } from "../../constant/pokemon";
 
-export default function usePokedex(): PokedexItem[] {
+export default function usePokedex() {
   const [pokedexItems, setPokedexItems] = useState<PokedexItem[]>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
-  useEffect(() => {
-    getPokedex().then((res) => {
+  const fetchPokedex = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await getPokedex();
       const pokedexItems_ = Object.values(pokemonIds).map((id) => ({
         id,
         isFound: false,
@@ -18,8 +23,16 @@ export default function usePokedex(): PokedexItem[] {
       });
 
       setPokedexItems(pokedexItems_);
-    });
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPokedex();
   }, []);
 
-  return pokedexItems;
+  return { pokedexItems, fetchPokedex, loading, error };
 }

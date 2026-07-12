@@ -1,41 +1,11 @@
 import { useEffect, useState, PropsWithChildren } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import Loader from "./Loader";
 
 const API_HOST = process.env.REACT_APP_API_HOST;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-const PixelLoader = () => {
-    const size = 16;
-    return (
-        <>
-            <Box sx={{ display: "flex", gap: 2, alignItems: "center", mb: 1 }}>
-                {Array.from({ length: 3 }).map((_, i) => (
-                    <Box
-                        key={i}
-                        sx={{
-                            width: size,
-                            height: size,
-                            bgcolor: "#ff3b3b",
-                            border: "2px solid #000",
-                            boxSizing: "border-box",
-                            imageRendering: "pixelated",
-                            transformOrigin: "center",
-                            animation: `bounce 700ms ${i * 150}ms infinite cubic-bezier(.2,.7,.2,1)`,
-                        }}
-                    />
-                ))}
-            </Box>
-            <Box component="style">{`
-                @keyframes bounce {
-                  0%, 100% { transform: translateY(0); }
-                  50% { transform: translateY(-10px); }
-                }
-            `}</Box>
-        </>
-    );
-};
 
 export default function ApiStartupGate({ children }: PropsWithChildren) {
     const { t } = useTranslation();
@@ -104,7 +74,7 @@ export default function ApiStartupGate({ children }: PropsWithChildren) {
         >
             {status === "checking" ? (
                 <>
-                    <PixelLoader />
+                    <Loader fillHeight={false} />
                     <Typography>{t("startup.waking")}</Typography>
                 </>
             ) : (
