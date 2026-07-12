@@ -66,7 +66,13 @@ export default function PokemonPage() {
           flexGrow={1}
         >
           {pokemons.map((pokemon) => (
-            <Grid key={pokemon.id} item xs={3} sm={1.5} height="fit-content">
+            <Grid
+              key={pokemon.internalId}
+              item
+              xs={3}
+              sm={1.5}
+              height="fit-content"
+            >
               <PokemonSlot
                 pokemon={pokemon}
                 onSelect={() => setSelectedPokemon(pokemon)}

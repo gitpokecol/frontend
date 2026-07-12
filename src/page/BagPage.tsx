@@ -44,15 +44,24 @@ export default function BagPage() {
     return res.is_used;
   };
 
-  if (!bagItems || !selectedBagItem) {
+  if (!bagItems) {
     return <PageContainer backgroundTheme="small"></PageContainer>;
   }
-  return (
-    <PageContainer backgroundTheme="small">
-      {bagItems.length === 0 ? (
+
+  if (bagItems.length === 0) {
+    return (
+      <PageContainer backgroundTheme="small">
         <Stack height="100%" alignItems="center" paddingTop={10}>
           <Typography>{t("bag.no-items")}</Typography>
         </Stack>
+      </PageContainer>
+    );
+  }
+
+  return (
+    <PageContainer backgroundTheme="small">
+      {!selectedBagItem ? (
+        <></>
       ) : (
         <Stack
           height="100%"

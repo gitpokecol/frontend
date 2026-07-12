@@ -34,7 +34,7 @@ export function PokemonSelectModal({
   const handleSelect = async (pokemon: Pokemon) => {
     const isSuccess = await onSelect(pokemon);
     if (!isSuccess) {
-      pokemonSlotRefs.current[pokemon.id].triggerFailed();
+      pokemonSlotRefs.current[pokemon.internalId]?.triggerFailed();
     }
   };
 
@@ -74,9 +74,15 @@ export function PokemonSelectModal({
           paddingX={1}
         >
           {pokemons.map((pokemon) => (
-            <Grid key={pokemon.id} item xs={3} sm={1.5} height="fit-content">
+            <Grid
+              key={pokemon.internalId}
+              item
+              xs={3}
+              sm={1.5}
+              height="fit-content"
+            >
               <PokemonSlot
-                ref={(el) => (pokemonSlotRefs.current[pokemon.id] = el)}
+                ref={(el) => (pokemonSlotRefs.current[pokemon.internalId] = el)}
                 pokemon={pokemon}
                 onSelect={() => handleSelect(pokemon)}
               />
