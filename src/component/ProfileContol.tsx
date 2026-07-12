@@ -13,6 +13,7 @@ import {
 import BackgroundSelector from "./BackgroundSelector";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { pixelCard } from "../style/pixel";
 
 interface ProfileControlProps {
   onChangeBackground: (value: string) => void;
@@ -34,9 +35,7 @@ export default function ProfileControl({
   return (
     <Stack
       justifyContent="center"
-      sx={{ background: "#FFFFFF" }}
-      border={1}
-      borderRadius={2}
+      sx={pixelCard}
       padding={{ xs: 2, sm: 3 }}
     >
       <Table padding="none">

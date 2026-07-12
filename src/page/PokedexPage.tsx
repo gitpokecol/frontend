@@ -9,6 +9,7 @@ import PokedexPreview from "../component/PokedexPreview";
 import { useTranslation } from "react-i18next";
 import ErrorState from "../component/ErrorState";
 import SquareSkeleton from "../component/SquareSkeleton";
+import { pixelCard } from "../style/pixel";
 
 export default function PokedexPage() {
   const { t } = useTranslation();
@@ -44,12 +45,7 @@ export default function PokedexPage() {
             maxWidth="100%"
             maxHeight={400}
             gap={2}
-            sx={{
-              background: "#FFFFFF",
-              border: "1px solid gray",
-              borderRadius: 2,
-              padding: 2,
-            }}
+            sx={{ ...pixelCard, padding: 2 }}
           >
             {Array.from({ length: 6 }).map((_, i) => (
               <Stack key={i} direction="row" gap={2} alignItems="center">
@@ -91,13 +87,11 @@ export default function PokedexPage() {
         <PokedexPreview pokedexItem={selectedPokedexItem} />
         <List
           sx={{
+            ...pixelCard,
             width: 300,
             maxWidth: "100%",
             maxHeight: 400,
             overflow: "auto",
-            background: "#FFFFFF",
-            border: "1px solid gray",
-            borderRadius: 2,
             padding: 2,
           }}
         >
