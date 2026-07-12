@@ -9,8 +9,9 @@ import usePokemons from "../hook/api/usePokemons";
 import PokemonSlot from "./PokemonSlot";
 import CloseIcon from "@mui/icons-material/Close";
 import { Pokemon } from "../type/pokemon";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Loader from "./Loader";
 
 interface PokemonSelectModalProps {
   open?: boolean;
@@ -24,29 +25,27 @@ export function PokemonSelectModal({
   onSelect,
 }: PokemonSelectModalProps) {
   const { t } = useTranslation();
-  const { pokemons, fetchPokemons } = usePokemons();
+  const { pokemons, fetchPokemons, loading } = usePokemons();
   const pokemonSlotRefs = useRef<Record<number, any>>({});
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchPokemons();
+    if (open) fetchPokemons();
   }, [open]);
 
   const handleSelect = async (pokemon: Pokemon) => {
-    const isSuccess = await onSelect(pokemon);
-    if (!isSuccess) {
-      pokemonSlotRefs.current[pokemon.internalId]?.triggerFailed();
+    if (submitting) return;
+
+    setSubmitting(true);
+    try {
+      const isSuccess = await onSelect(pokemon);
+      if (!isSuccess) {
+        pokemonSlotRefs.current[pokemon.internalId]?.triggerFailed();
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
-
-  if (!pokemons)
-    return (
-      <Dialog
-        open={open}
-        onClose={onClose}
-        maxWidth="md"
-        scroll="paper"
-      ></Dialog>
-    );
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" scroll="paper">
@@ -64,31 +63,39 @@ export function PokemonSelectModal({
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Grid
-          container
-          alignContent="flex-start"
-          spacing={2}
-          width={700}
-          maxWidth="100%"
-          overflow="auto"
-          paddingX={1}
-        >
-          {pokemons.map((pokemon) => (
-            <Grid
-              key={pokemon.internalId}
-              item
-              xs={3}
-              sm={1.5}
-              height="fit-content"
-            >
-              <PokemonSlot
-                ref={(el) => (pokemonSlotRefs.current[pokemon.internalId] = el)}
-                pokemon={pokemon}
-                onSelect={() => handleSelect(pokemon)}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        {loading || !pokemons ? (
+          <Grid container width={700} maxWidth="100%" minHeight={120}>
+            <Loader />
+          </Grid>
+        ) : (
+          <Grid
+            container
+            alignContent="flex-start"
+            spacing={2}
+            width={700}
+            maxWidth="100%"
+            overflow="auto"
+            paddingX={1}
+            sx={{ opacity: submitting ? 0.6 : 1, pointerEvents: submitting ? "none" : "auto" }}
+            aria-busy={submitting}
+          >
+            {pokemons.map((pokemon) => (
+              <Grid
+                key={pokemon.internalId}
+                item
+                xs={3}
+                sm={1.5}
+                height="fit-content"
+              >
+                <PokemonSlot
+                  ref={(el) => (pokemonSlotRefs.current[pokemon.internalId] = el)}
+                  pokemon={pokemon}
+                  onSelect={() => handleSelect(pokemon)}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </DialogContent>
     </Dialog>
   );

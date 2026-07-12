@@ -35,19 +35,21 @@ interface PokedexListButtonProps {
   number: number;
   name: string;
   hasFound: boolean;
+  onClick?: () => void;
 }
 
 export default function PokedexListButton({
   number,
   name,
   hasFound,
+  onClick,
 }: PokedexListButtonProps) {
   const numberPart = "#" + number.toString().padStart(3, "0");
 
   return (
     <>
       {hasFound ? (
-        <FoundPokedexListButton fullWidth>
+        <FoundPokedexListButton fullWidth onClick={onClick}>
           <Pokeball style={{ maxWidth: 32, minWidth: 24 }} />
           <ListItemText
             sx={{ textAlign: "left" }}
@@ -55,7 +57,7 @@ export default function PokedexListButton({
           />
         </FoundPokedexListButton>
       ) : (
-        <NotFoundPokedexListButton fullWidth>
+        <NotFoundPokedexListButton fullWidth onClick={onClick}>
           <DisablePokeball style={{ maxWidth: 32, minWidth: 24 }} />
           <ListItemText
             sx={{ textAlign: "left" }}

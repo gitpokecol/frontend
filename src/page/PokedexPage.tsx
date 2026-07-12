@@ -7,16 +7,34 @@ import { useState } from "react";
 import { PokedexItem } from "../type/pokedex";
 import PokedexPreview from "../component/PokedexPreview";
 import { useTranslation } from "react-i18next";
+import Loader from "../component/Loader";
+import ErrorState from "../component/ErrorState";
 
 export default function PokedexPage() {
   const { t } = useTranslation();
-  const pokedexItems = usePokedex();
+  const { pokedexItems, fetchPokedex, loading, error } = usePokedex();
   const [selectedPokedexItem, setSelectedPokedexItem] =
     useState<PokedexItem | null>(null);
 
   const onSelectPokedexItem = (pokedexItem: PokedexItem) => {
     setSelectedPokedexItem(pokedexItem);
   };
+
+  if (loading) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <Loader />
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <ErrorState onRetry={fetchPokedex} />
+      </PageContainer>
+    );
+  }
 
   if (!pokedexItems) {
     return <PageContainer backgroundTheme="small"></PageContainer>;
@@ -49,16 +67,12 @@ export default function PokedexPage() {
           }}
         >
           {pokedexItems.map((pokedexItem) => (
-            <ListItem
-              sx={{ width: "100%" }}
-              disablePadding
-              key={pokedexItem.id}
-              onClick={() => onSelectPokedexItem(pokedexItem)}
-            >
+            <ListItem sx={{ width: "100%" }} disablePadding key={pokedexItem.id}>
               <PokedexListButton
                 number={pokedexItem.id}
                 name={t(`pokemon-name.${pokedexItem.id}`)}
                 hasFound={pokedexItem.isFound}
+                onClick={() => onSelectPokedexItem(pokedexItem)}
               />
             </ListItem>
           ))}

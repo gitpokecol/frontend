@@ -12,10 +12,12 @@ import { Pokemon } from "../type/pokemon";
 import { postUseItem } from "../api/apis";
 import { useTranslation } from "react-i18next";
 import useAlert from "../hook/useAlert";
+import Loader from "../component/Loader";
+import ErrorState from "../component/ErrorState";
 
 export default function BagPage() {
   const { t } = useTranslation();
-  const { bagItems, fetchBagItems } = useBagItems();
+  const { bagItems, fetchBagItems, loading, error } = useBagItems();
   const [selectedBagItem, setSelectedBagItem] = useState<BagItem | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const alert = useAlert();
@@ -29,20 +31,40 @@ export default function BagPage() {
   };
 
   const handleSelectPokemon = async (pokemon: Pokemon) => {
-    const res = await postUseItem(
-      pokemon.internalId,
-      selectedBagItem.item_type
-    );
+    if (!selectedBagItem) return false;
 
-    if (res.is_used) {
-      handleCloseModal();
-      fetchBagItems();
-    } else {
+    try {
+      const res = await postUseItem(pokemon.internalId, selectedBagItem.item_type);
+
+      if (res.is_used) {
+        handleCloseModal();
+        fetchBagItems();
+      } else {
+        alert(t("bag.use-item-failed"), "error");
+      }
+
+      return res.is_used;
+    } catch {
       alert(t("bag.use-item-failed"), "error");
+      return false;
     }
-
-    return res.is_used;
   };
+
+  if (loading) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <Loader />
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <ErrorState onRetry={fetchBagItems} />
+      </PageContainer>
+    );
+  }
 
   if (!bagItems) {
     return <PageContainer backgroundTheme="small"></PageContainer>;

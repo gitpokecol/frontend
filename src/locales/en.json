@@ -11,6 +11,12 @@
         "cannotWake": "Unable to wake the server right now."
     },
     "retry": "Retry",
+    "error": {
+        "generic": "Something went wrong."
+    },
+    "empty": {
+        "no-pokemon": "You don't have any Pokemon yet."
+    },
     "notfound": {
         "detail-1": "THIS IS NOT THE PAGE YOU'RE LOOKING FOR.",
         "go-main": "GO TO MAIN PAGE"

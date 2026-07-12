@@ -7,17 +7,50 @@ import { Pokemon } from "../type/pokemon";
 import PokemonAnimatedSprite from "../component/PokemonAnimatedSprite";
 import PokemonDetail from "../component/PokemonDetail";
 import { pokemonBackgroundColors } from "../constant/pokemon";
+import Loader from "../component/Loader";
+import ErrorState from "../component/ErrorState";
+import EmptyState from "../component/EmptyState";
+import { useTranslation } from "react-i18next";
 
 export default function PokemonPage() {
-  const { pokemons } = usePokemons();
+  const { t } = useTranslation();
+  const { pokemons, loading, error, fetchPokemons } = usePokemons();
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
-    if (pokemons) setSelectedPokemon(pokemons[0]);
+    if (pokemons && pokemons.length > 0) setSelectedPokemon(pokemons[0]);
   }, [pokemons]);
 
-  if (!pokemons || !selectedPokemon) {
-    return <PageContainer backgroundTheme="small"></PageContainer>;
+  if (loading) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <Loader />
+      </PageContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <ErrorState onRetry={fetchPokemons} />
+      </PageContainer>
+    );
+  }
+
+  if (!pokemons || pokemons.length === 0) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <EmptyState message={t("empty.no-pokemon")} />
+      </PageContainer>
+    );
+  }
+
+  if (!selectedPokemon) {
+    return (
+      <PageContainer backgroundTheme="small">
+        <Loader />
+      </PageContainer>
+    );
   }
 
   return (
