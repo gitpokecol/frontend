@@ -15,21 +15,20 @@ export default function AuthCallbackPage() {
     const error = searchParams.get("error");
 
     if (error || !code) {
-      throw new Error("Login was failed.");
+      navigate("/login");
+      return;
     }
 
-    if (code) {
-      getGithubAuthCallback(code)
-        .then((response) => {
-          localStorage.setItem(ACCESS_TOKEN_KEY, response.access_token);
-          axiosInstance.defaults.headers.Authorization = response.access_token;
-        })
-        .catch((error) => {})
-        .finally(() => {
-          navigate("/");
-        });
-    }
-  }, [searchParams]);
+    getGithubAuthCallback(code)
+      .then((response) => {
+        localStorage.setItem(ACCESS_TOKEN_KEY, response.access_token);
+        axiosInstance.defaults.headers.Authorization = response.access_token;
+        navigate("/");
+      })
+      .catch(() => {
+        navigate("/login");
+      });
+  }, [searchParams, navigate]);
 
   return (
     <PageContainer backgroundTheme="small">

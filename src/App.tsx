@@ -13,6 +13,7 @@ import DailyItemPage from "./page/DailyItemPage";
 import RootPage from "./page/RootPage";
 import BagPage from "./page/BagPage";
 import { SnackbarProvider } from "notistack";
+import RequireAuth from "./component/RequireAuth";
 
 function App() {
   return (
@@ -28,11 +29,46 @@ function App() {
             <Routes>
               <Route path="/" element={<RootPage />}></Route>
               <Route path="/login" element={<LoginPage />}></Route>
-              <Route path="/daily-item" element={<DailyItemPage />}></Route>
-              <Route path="/profile" element={<ProfilePage />}></Route>
-              <Route path="/pokedex" element={<PokedexPage />}></Route>
-              <Route path="/pokemon" element={<PokemonPage />}></Route>
-              <Route path="/bag" element={<BagPage />}></Route>
+              <Route
+                path="/daily-item"
+                element={
+                  <RequireAuth>
+                    <DailyItemPage />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="/profile"
+                element={
+                  <RequireAuth>
+                    <ProfilePage />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="/pokedex"
+                element={
+                  <RequireAuth>
+                    <PokedexPage />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="/pokemon"
+                element={
+                  <RequireAuth>
+                    <PokemonPage />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="/bag"
+                element={
+                  <RequireAuth>
+                    <BagPage />
+                  </RequireAuth>
+                }
+              ></Route>
               <Route
                 path="/auth-callback"
                 element={<AuthCallbackPage />}
