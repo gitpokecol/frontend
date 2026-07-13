@@ -30,6 +30,19 @@ const theme = createTheme({
     ].join(","),
   },
   components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          "&.Mui-focusVisible": {
+            outline: "2px solid #3D96FF",
+            outlineOffset: 2,
+          },
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         root: {
