@@ -1,15 +1,15 @@
-import { Box, Grid, Skeleton, Stack } from "@mui/material";
-import PokemonSlot from "../component/PokemonSlot";
+import { Box, Skeleton, Stack } from "@mui/material";
 import PageContainer from "../component/PageContainer";
 import usePokemons from "../hook/api/usePokemons";
 import { useEffect, useState } from "react";
 import { Pokemon } from "../type/pokemon";
 import PokemonAnimatedSprite from "../component/PokemonAnimatedSprite";
 import PokemonDetail from "../component/PokemonDetail";
+import PokemonBox from "../component/PokemonBox";
 import { pokemonBackgroundColors } from "../constant/pokemon";
 import ErrorState from "../component/ErrorState";
 import EmptyState from "../component/EmptyState";
-import SlotGridSkeleton from "../component/SlotGridSkeleton";
+import SquareSkeleton from "../component/SquareSkeleton";
 import { useTranslation } from "react-i18next";
 import { pixelFrame } from "../style/pixel";
 
@@ -51,18 +51,19 @@ export default function PokemonPage() {
               ))}
             </Stack>
           </Stack>
-          <Grid
-            container
-            alignContent="flex-start"
-            spacing={2}
-            width={700}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(6, 1fr)",
+              gap: 1,
+            }}
+            width={560}
             maxWidth="100%"
-            overflow="hidden"
-            height={0}
-            flexGrow={1}
           >
-            <SlotGridSkeleton />
-          </Grid>
+            {Array.from({ length: 30 }).map((_, i) => (
+              <SquareSkeleton key={i} />
+            ))}
+          </Box>
         </Stack>
       </PageContainer>
     );
@@ -122,31 +123,11 @@ export default function PokemonPage() {
           <PokemonDetail pokemon={selectedPokemon} />
         </Stack>
 
-        <Grid
-          container
-          alignContent="flex-start"
-          spacing={2}
-          width={700}
-          maxWidth="100%"
-          overflow="auto"
-          height={0}
-          flexGrow={1}
-        >
-          {pokemons.map((pokemon) => (
-            <Grid
-              key={pokemon.internalId}
-              item
-              xs={3}
-              sm={1.5}
-              height="fit-content"
-            >
-              <PokemonSlot
-                pokemon={pokemon}
-                onSelect={() => setSelectedPokemon(pokemon)}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <PokemonBox
+          pokemons={pokemons}
+          selectedId={selectedPokemon.internalId}
+          onSelect={setSelectedPokemon}
+        />
       </Stack>
     </PageContainer>
   );

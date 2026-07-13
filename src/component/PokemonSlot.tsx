@@ -8,13 +8,16 @@ import { PIXEL_ACCENT, PIXEL_INK } from "../style/pixel";
 interface PokemonSlotProps {
   pokemon: Pokemon;
   onSelect: () => void;
+  selected?: boolean;
 }
 
-const pokemonSlotStyling = (isShaking: boolean) => {
+const pokemonSlotStyling = (isShaking: boolean, selected: boolean) => {
   const style = {
     borderRadius: 0,
-    background: "#F5F5F5CA",
-    border: "2px solid rgba(51, 50, 60, 0.25)",
+    background: selected ? "#D6E9FFCA" : "#F5F5F5CA",
+    border: selected
+      ? `2px solid ${PIXEL_ACCENT}`
+      : "2px solid rgba(51, 50, 60, 0.25)",
     ":hover": {
       background: "#56AEFFCA",
       borderColor: PIXEL_ACCENT,
@@ -37,7 +40,7 @@ const pokemonSlotStyling = (isShaking: boolean) => {
 };
 
 const PokemonSlot = forwardRef(
-  ({ pokemon, onSelect }: PokemonSlotProps, ref) => {
+  ({ pokemon, onSelect, selected = false }: PokemonSlotProps, ref) => {
     const [isShaking, setIsShaking] = useState<boolean>(false);
 
     useImperativeHandle(ref, () => ({
@@ -50,7 +53,7 @@ const PokemonSlot = forwardRef(
     }));
 
     return (
-      <Box position="relative" sx={pokemonSlotStyling(isShaking)}>
+      <Box position="relative" sx={pokemonSlotStyling(isShaking, selected)}>
         <Typography
           textAlign="center"
           position="absolute"
