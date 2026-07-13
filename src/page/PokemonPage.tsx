@@ -54,7 +54,10 @@ export default function PokemonPage() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: "repeat(6, 1fr)",
+              gridTemplateColumns: {
+                xs: "repeat(4, minmax(0, 1fr))",
+                sm: "repeat(6, minmax(0, 1fr))",
+              },
               gap: 1,
             }}
             width={560}
