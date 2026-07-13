@@ -28,13 +28,13 @@ export default function PokemonPage() {
         <Stack
           height="100%"
           alignItems="center"
-          gap={10}
+          gap={5}
           justifyContent="stretch"
           aria-busy="true"
         >
           <Stack
             direction={{ xs: "row", sm: "row" }}
-            gap={{ xs: 2, sm: 10 }}
+            gap={{ xs: 2, sm: 5 }}
             alignItems="center"
           >
             <Skeleton
@@ -94,12 +94,12 @@ export default function PokemonPage() {
       <Stack
         height="100%"
         alignItems="center"
-        gap={10}
+        gap={5}
         justifyContent="stretch"
       >
         <Stack
           direction={{ xs: "row", sm: "row" }}
-          gap={{ xs: 2, sm: 10 }}
+          gap={{ xs: 2, sm: 5 }}
           alignItems="center"
         >
           <Box
