@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import useUsername from "../hook/useUsername";
 import ProfileControl from "../component/ProfileContol";
 import { useTranslation } from "react-i18next";
-import { pixelCard, pixelFrame } from "../style/pixel";
+import { pixelCard } from "../style/pixel";
 
 export default function ProfilePage() {
   const { t } = useTranslation();
@@ -61,7 +61,7 @@ export default function ProfilePage() {
           <Box
             position="relative"
             maxWidth="100%"
-            sx={{ ...pixelFrame, overflow: "hidden", lineHeight: 0 }}
+            sx={{ ...pixelCard, lineHeight: 0 }}
           >
             {!imageLoaded && (
               <Skeleton

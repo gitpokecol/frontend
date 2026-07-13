@@ -59,7 +59,6 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
             sx={{
               ...pixelFrame,
               background: pokemonBackgroundColors[pokedexItem.id],
-              overflow: "hidden",
             }}
           >
             <PokemonAnimatedSprite
@@ -134,7 +133,6 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
             sx={{
               ...pixelFrame,
               background: "#c7c7c7",
-              overflow: "hidden",
             }}
           >
             <img
