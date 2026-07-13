@@ -11,7 +11,6 @@ import ErrorState from "../component/ErrorState";
 import EmptyState from "../component/EmptyState";
 import SlotGridSkeleton from "../component/SlotGridSkeleton";
 import { useTranslation } from "react-i18next";
-import { pixelFrame } from "../style/pixel";
 
 export default function PokemonPage() {
   const { t } = useTranslation();
@@ -103,8 +102,9 @@ export default function PokemonPage() {
         >
           <Box
             sx={{
-              ...pixelFrame,
               background: pokemonBackgroundColors[selectedPokemon.id],
+              border: "1px solid gray",
+              borderRadius: 2,
               padding: 1,
             }}
             width={{ xs: 100, sm: 200 }}

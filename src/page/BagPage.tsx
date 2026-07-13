@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import useAlert from "../hook/useAlert";
 import ErrorState from "../component/ErrorState";
 import SlotGridSkeleton from "../component/SlotGridSkeleton";
-import { pixelCard } from "../style/pixel";
 
 export default function BagPage() {
   const { t } = useTranslation();
@@ -131,7 +130,12 @@ export default function BagPage() {
         >
           <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
             <Box
-              sx={{ ...pixelCard, padding: 1 }}
+              sx={{
+                background: "white",
+                border: "1px solid gray",
+                borderRadius: 2,
+                padding: 1,
+              }}
               width={{ xs: 100, sm: 200 }}
               height={{ xs: 100, sm: 200 }}
             >

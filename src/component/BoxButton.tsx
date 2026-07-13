@@ -1,34 +1,23 @@
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { PIXEL_ACCENT_COLOR, PIXEL_BORDER_COLOR } from "../style/pixel";
 
 const BoxButton = styled(Button)({
-  boxShadow: `3px 3px 0 ${PIXEL_BORDER_COLOR}`,
+  boxShadow: "none",
   textTransform: "none",
   fontSize: 16,
   color: "#000000",
-  border: `3px solid ${PIXEL_BORDER_COLOR}`,
-  borderRadius: 6,
+  border: "4px solid",
   backgroundColor: "#FFFFFF",
-  transition: "transform 80ms ease-out, box-shadow 80ms ease-out",
+  borderColor: "#000000",
   "&:hover": {
     backgroundColor: "#FFFFFF",
-    color: PIXEL_ACCENT_COLOR,
-    borderColor: PIXEL_ACCENT_COLOR,
-    boxShadow: `3px 3px 0 ${PIXEL_ACCENT_COLOR}`,
+    color: "#3D96FF",
+    borderColor: "#3D96FF",
   },
   "&:active": {
-    color: PIXEL_ACCENT_COLOR,
+    color: "#3D96FF",
     backgroundColor: "#FFFFFF",
-    borderColor: PIXEL_ACCENT_COLOR,
-    transform: "translate(3px, 3px)",
-    boxShadow: `0 0 0 ${PIXEL_ACCENT_COLOR}`,
-  },
-  "&.Mui-disabled": {
-    backgroundColor: "#F5F5F5",
-    borderColor: "#A0A0A0",
-    color: "#A0A0A0",
-    boxShadow: "3px 3px 0 #A0A0A0",
+    borderColor: "#3D96FF",
   },
 });
 

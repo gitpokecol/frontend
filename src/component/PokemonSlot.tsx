@@ -3,7 +3,6 @@ import PokemonAnimatedSprite from "./PokemonAnimatedSprite";
 import { Pokemon } from "../type/pokemon";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { horizontalShakeAnimation } from "../style/shake";
-import { PIXEL_ACCENT_COLOR, PIXEL_BORDER_COLOR } from "../style/pixel";
 
 interface PokemonSlotProps {
   pokemon: Pokemon;
@@ -14,10 +13,8 @@ const pokemonSlotStyling = (isShaking: boolean) => {
   const style = {
     borderRadius: 2,
     background: "#F5F5F5CA",
-    border: "2px solid rgba(43, 43, 43, 0.25)",
     ":hover": {
       background: "#56AEFFCA",
-      borderColor: PIXEL_ACCENT_COLOR,
     },
   };
 
@@ -25,10 +22,8 @@ const pokemonSlotStyling = (isShaking: boolean) => {
     return {
       ...style,
       background: "#ef5350",
-      borderColor: PIXEL_BORDER_COLOR,
       ":hover": {
         background: "#ef5350",
-        borderColor: PIXEL_BORDER_COLOR,
       },
       animation: `${horizontalShakeAnimation} 100ms ease-in-out 2`,
     };

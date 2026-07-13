@@ -12,7 +12,6 @@ import { Pokemon } from "../type/pokemon";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SlotGridSkeleton from "./SlotGridSkeleton";
-import { pixelCard } from "../style/pixel";
 
 interface PokemonSelectModalProps {
   open?: boolean;
@@ -49,13 +48,7 @@ export function PokemonSelectModal({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      scroll="paper"
-      PaperProps={{ sx: pixelCard }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="md" scroll="paper">
       <DialogTitle>{t("pokemon-select.title")}</DialogTitle>
       <IconButton
         aria-label="close"

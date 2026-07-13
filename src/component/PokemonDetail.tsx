@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Pokemon } from "../type/pokemon";
 import { useTranslation } from "react-i18next";
-import { pixelCard } from "../style/pixel";
 
 interface PokemonDetailProps {
   pokemon: Pokemon;
@@ -22,7 +21,9 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
       justifyContent="center"
       width={{ xs: 150, sm: 300 }}
       sx={{
-        ...pixelCard,
+        background: "white",
+        border: "1px solid gray",
+        borderRadius: 2,
         padding: 2,
         "& .MuiTypography-root": {
           xs: { fontSize: 20 },

@@ -10,7 +10,6 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { pixelFrame } from "../style/pixel";
 
 interface PokedexPreviewProps {
   pokedexItem?: PokedexItem;
@@ -57,9 +56,9 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
             position="relative"
             alignItems="center"
             sx={{
-              ...pixelFrame,
               background: pokemonBackgroundColors[pokedexItem.id],
-              overflow: "hidden",
+              border: "1px solid gray",
+              borderRadius: 2,
             }}
           >
             <PokemonAnimatedSprite
@@ -132,9 +131,9 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
             position="relative"
             alignItems="center"
             sx={{
-              ...pixelFrame,
               background: "#c7c7c7",
-              overflow: "hidden",
+              border: "1px solid gray",
+              borderRadius: 2,
             }}
           >
             <img
