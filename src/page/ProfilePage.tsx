@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import useUsername from "../hook/useUsername";
 import ProfileControl from "../component/ProfileContol";
 import { useTranslation } from "react-i18next";
+import { pixelCard } from "../style/pixel";
 
 export default function ProfilePage() {
   const { t } = useTranslation();
@@ -57,7 +58,11 @@ export default function ProfilePage() {
           alignItems="center"
           gap={5}
         >
-          <Box position="relative" maxWidth="100%">
+          <Box
+            position="relative"
+            maxWidth="100%"
+            sx={{ ...pixelCard, lineHeight: 0 }}
+          >
             {!imageLoaded && (
               <Skeleton
                 variant="rectangular"
@@ -67,9 +72,6 @@ export default function ProfilePage() {
                   minWidth: width,
                   width,
                   height,
-                  border: "1px solid black",
-                  borderRadius: "5px",
-                  boxSizing: "border-box",
                 }}
               />
             )}
@@ -80,8 +82,6 @@ export default function ProfilePage() {
                 minWidth: width,
                 width,
                 height,
-                border: "1px solid black",
-                borderRadius: 5,
                 display: imageLoaded ? undefined : "none",
               }}
               src={url}
@@ -97,13 +97,7 @@ export default function ProfilePage() {
           />
         </Stack>
         <Box maxWidth="100%">
-          <Stack
-            border={1}
-            sx={{ background: "#FFFFFF" }}
-            padding={3}
-            gap={3}
-            borderRadius={2}
-          >
+          <Stack sx={pixelCard} padding={3} gap={3}>
             <Typography>{t("profile.detail-1")}</Typography>
             <Stack marginLeft={2}>
               <Typography>Markdown</Typography>

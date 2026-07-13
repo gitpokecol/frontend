@@ -6,6 +6,7 @@ import PixelatedImage from "./PixelatedImage";
 import { getItemSpriteUrl } from "../util/sprite";
 import useImagePreload from "../hook/useImagePreload";
 import SquareSkeleton from "./SquareSkeleton";
+import { PIXEL_ACCENT } from "../style/pixel";
 
 const spriteStyling = css({});
 
@@ -19,7 +20,7 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
   const loaded = useImagePreload(spriteUrl);
 
   if (!loaded) {
-    return <SquareSkeleton borderRadius={3} />;
+    return <SquareSkeleton />;
   }
 
   return (
@@ -27,14 +28,17 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
       position="relative"
       sx={{
         background: "#F5F5F5CA",
-        borderRadius: 3,
+        borderRadius: 0,
+        border: "2px solid rgba(51, 50, 60, 0.25)",
         ":hover": {
           background: "#56AEFFCA",
+          borderColor: PIXEL_ACCENT,
         },
         padding: 1,
 
         ":active": {
           background: "#51A0E9CA",
+          borderColor: PIXEL_ACCENT,
         },
       }}
     >
