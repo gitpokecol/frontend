@@ -1,4 +1,11 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useState } from "react";
@@ -7,9 +14,7 @@ import { Pokemon } from "../type/pokemon";
 import PokemonSlot from "./PokemonSlot";
 import { PIXEL_FRAME_LINE, PIXEL_INK, pixelCard } from "../style/pixel";
 
-const BOX_COLUMNS = 6;
 const BOX_ROWS = 5;
-const BOX_SIZE = BOX_COLUMNS * BOX_ROWS;
 
 const wallpaperStyle = {
   backgroundImage: `conic-gradient(#EAF2FC 90deg, #DFEAF8 90deg 180deg, #EAF2FC 180deg 270deg, #DFEAF8 270deg)`,
@@ -28,20 +33,25 @@ export default function PokemonBox({
   onSelect,
 }: PokemonBoxProps) {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [boxIndex, setBoxIndex] = useState<number>(0);
 
-  const boxCount = Math.max(1, Math.ceil(pokemons.length / BOX_SIZE));
+  const boxColumns = isMobile ? 4 : 6;
+  const boxSize = boxColumns * BOX_ROWS;
+  const boxCount = Math.max(1, Math.ceil(pokemons.length / boxSize));
+  const currentBox = Math.min(boxIndex, boxCount - 1);
   const boxPokemons = pokemons.slice(
-    boxIndex * BOX_SIZE,
-    (boxIndex + 1) * BOX_SIZE
+    currentBox * boxSize,
+    (currentBox + 1) * boxSize
   );
 
   const goPrevBox = () => {
-    setBoxIndex((boxIndex - 1 + boxCount) % boxCount);
+    setBoxIndex((currentBox - 1 + boxCount) % boxCount);
   };
 
   const goNextBox = () => {
-    setBoxIndex((boxIndex + 1) % boxCount);
+    setBoxIndex((currentBox + 1) % boxCount);
   };
 
   return (
@@ -64,7 +74,7 @@ export default function PokemonBox({
           <ChevronLeftIcon />
         </IconButton>
         <Typography fontSize={{ xs: 20, sm: 25 }}>
-          {t("pokemon-box.title", { n: boxIndex + 1 })}
+          {t("pokemon-box.title", { n: currentBox + 1 })}
         </Typography>
         <IconButton
           aria-label="next box"
@@ -78,12 +88,12 @@ export default function PokemonBox({
         sx={{
           ...wallpaperStyle,
           display: "grid",
-          gridTemplateColumns: `repeat(${BOX_COLUMNS}, 1fr)`,
+          gridTemplateColumns: `repeat(${boxColumns}, minmax(0, 1fr))`,
           gap: 1,
           padding: 1.5,
         }}
       >
-        {Array.from({ length: BOX_SIZE }).map((_, i) => {
+        {Array.from({ length: boxSize }).map((_, i) => {
           const pokemon = boxPokemons[i];
 
           if (!pokemon) {
