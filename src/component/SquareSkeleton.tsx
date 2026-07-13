@@ -5,7 +5,7 @@ interface SquareSkeletonProps {
 }
 
 export default function SquareSkeleton({
-  borderRadius = 2,
+  borderRadius = 0,
 }: SquareSkeletonProps) {
   return (
     <Skeleton
