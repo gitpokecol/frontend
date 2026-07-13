@@ -20,10 +20,11 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
   return (
     <Stack
       justifyContent="center"
-      width={{ xs: 150, sm: 300 }}
       sx={{
         ...pixelCard,
         padding: 2,
+        flexGrow: 1,
+        minWidth: 0,
         "& .MuiTypography-root": {
           xs: { fontSize: 20 },
           sm: { fontSize: 30 },

@@ -33,19 +33,21 @@ export default function PokemonPage() {
           aria-busy="true"
         >
           <Stack
-            direction={{ xs: "row", sm: "row" }}
-            gap={{ xs: 2, sm: 5 }}
-            alignItems="center"
+            direction="row"
+            gap={2}
+            alignItems="stretch"
+            width={560}
+            maxWidth="100%"
           >
             <Skeleton
               variant="rectangular"
               sx={{
-                width: { xs: 100, sm: 200 },
-                height: { xs: 100, sm: 200 },
-                borderRadius: 2,
+                width: { xs: 130, sm: 200 },
+                height: { xs: 180, sm: 230 },
+                flexShrink: 0,
               }}
             />
-            <Stack width={{ xs: 150, sm: 300 }} gap={1}>
+            <Stack flexGrow={1} gap={1} justifyContent="center">
               {Array.from({ length: 4 }).map((_, i) => (
                 <Skeleton key={i} sx={{ fontSize: { xs: 20, sm: 30 } }} />
               ))}
@@ -101,9 +103,11 @@ export default function PokemonPage() {
         justifyContent="stretch"
       >
         <Stack
-          direction={{ xs: "row", sm: "row" }}
-          gap={{ xs: 2, sm: 5 }}
-          alignItems="center"
+          direction="row"
+          gap={2}
+          alignItems="stretch"
+          width={560}
+          maxWidth="100%"
         >
           <Box
             sx={{
@@ -111,8 +115,8 @@ export default function PokemonPage() {
               background: pokemonBackgroundColors[selectedPokemon.id],
               padding: 1,
             }}
-            width={{ xs: 100, sm: 200 }}
-            height={{ xs: 100, sm: 200 }}
+            width={{ xs: 130, sm: 200 }}
+            flexShrink={0}
           >
             <PokemonAnimatedSprite
               style={{
