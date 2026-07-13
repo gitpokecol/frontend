@@ -58,6 +58,9 @@
     "pokemon-select": {
         "title": "Select a Pokemon to use item on."
     },
+    "pokemon-box": {
+        "title": "BOX {{n}}"
+    },
     "pokemon-form": {
         "default": "Default",
         "-exclamation":"!",
