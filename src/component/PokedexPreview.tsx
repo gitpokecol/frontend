@@ -56,11 +56,18 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
           <Stack
             position="relative"
             alignItems="center"
-            sx={pixelFramed(pokemonBackgroundColors[pokedexItem.id])}
+            justifyContent="center"
+            sx={{
+              ...pixelFramed(pokemonBackgroundColors[pokedexItem.id]),
+              aspectRatio: "1 / 1",
+              overflow: "hidden",
+            }}
           >
             <PokemonAnimatedSprite
               style={{
-                minWidth: "100%",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
               }}
               pokemon={{
                 internalId: 0,
@@ -127,10 +134,20 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
           <Stack
             position="relative"
             alignItems="center"
-            sx={pixelFramed("#c7c7c7")}
+            justifyContent="center"
+            sx={{
+              ...pixelFramed("#c7c7c7"),
+              aspectRatio: "1 / 1",
+              overflow: "hidden",
+            }}
           >
             <img
-              style={{ width: "100%", imageRendering: "pixelated" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                imageRendering: "pixelated",
+              }}
               src={MissingImage}
               alt="pokemon sprite"
             />

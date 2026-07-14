@@ -30,6 +30,11 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
         background: "#F5F5F5CA",
         borderRadius: 0,
         border: "2px solid rgba(51, 50, 60, 0.25)",
+        aspectRatio: "1 / 1",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
         ":hover": {
           background: "#56AEFFCA",
           borderColor: PIXEL_ACCENT,
@@ -52,7 +57,7 @@ export default function ItemSlot({ bagItem, onSelect }: ItemSlotProps) {
         {bagItem.count}
       </Typography>
       <PixelatedImage
-        style={{ width: "100%" }}
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
         onClick={onSelect}
         src={spriteUrl}
         css={spriteStyling}
