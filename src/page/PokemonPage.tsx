@@ -113,15 +113,19 @@ export default function PokemonPage() {
             sx={{
               ...pixelFramed(pokemonBackgroundColors[selectedPokemon.id]),
               padding: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
             width={{ xs: 130, sm: 200 }}
             flexShrink={0}
           >
             <PokemonAnimatedSprite
               style={{
-                minWidth: "100%",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
               }}
-              height="100%"
               pokemon={selectedPokemon}
               facing="front"
             />

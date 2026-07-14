@@ -53,12 +53,22 @@ const PokemonSlot = forwardRef(
     }));
 
     return (
-      <Box position="relative" sx={pokemonSlotStyling(isShaking, selected)}>
+      <Box
+        position="relative"
+        sx={{
+          ...pokemonSlotStyling(isShaking, selected),
+          aspectRatio: "1 / 1",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }}
+      >
         <Typography
           textAlign="center"
           position="absolute"
           width="100%"
-          marginTop={-1}
+          top={-4}
           fontSize={20}
         >
           Lv {pokemon.level}
@@ -79,7 +89,7 @@ const PokemonSlot = forwardRef(
           onClick={onSelect}
           pokemon={pokemon}
           facing="down"
-          style={{ minWidth: "100%" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </Box>
     );

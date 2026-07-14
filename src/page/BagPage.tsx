@@ -131,12 +131,18 @@ export default function BagPage() {
         >
           <Stack direction="row" gap={{ xs: 2, sm: 10 }} alignItems="center">
             <Box
-              sx={{ ...pixelCard, padding: 1 }}
+              sx={{
+                ...pixelCard,
+                padding: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
               width={{ xs: 100, sm: 200 }}
               height={{ xs: 100, sm: 200 }}
             >
               <PixelatedImage
-                width="100%"
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 src={getItemSpriteUrl(selectedBagItem.item_type)}
                 alt={t(`item-name.${selectedBagItem.item_type}`)}
               />
