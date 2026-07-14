@@ -38,7 +38,11 @@ export const pixelCard = {
 
 export const pixelFramed = (face: string) => ({
   ...pixelCard,
-  borderImageSource: dialogFrameTile(PIXEL_INK, PIXEL_FRAME_LINE, face),
+  borderImageSource: dialogFrameTile(
+    PIXEL_INK,
+    "rgba(255, 255, 255, 0.6)",
+    face
+  ),
 });
 
 export const pixelButtonFrames = {
