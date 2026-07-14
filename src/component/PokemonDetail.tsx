@@ -48,6 +48,14 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
             <TableCell align="right">
               <Typography color="#3D96FF">
                 {t(`pokemon-name.${pokemon.id}`)}
+                {pokemon.isShiny && (
+                  <span
+                    aria-label="shiny"
+                    style={{ color: "#E6A800", marginLeft: 6 }}
+                  >
+                    ✦
+                  </span>
+                )}
               </Typography>
             </TableCell>
           </TableRow>

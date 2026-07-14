@@ -63,6 +63,18 @@ const PokemonSlot = forwardRef(
         >
           Lv {pokemon.level}
         </Typography>
+        {pokemon.isShiny && (
+          <Typography
+            aria-label="shiny"
+            position="absolute"
+            right={3}
+            bottom={1}
+            fontSize={16}
+            sx={{ color: "#E6A800", pointerEvents: "none" }}
+          >
+            ✦
+          </Typography>
+        )}
         <PokemonAnimatedSprite
           onClick={onSelect}
           pokemon={pokemon}
