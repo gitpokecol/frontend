@@ -9,7 +9,6 @@ import PokemonBox from "../component/PokemonBox";
 import { pokemonBackgroundColors } from "../constant/pokemon";
 import ErrorState from "../component/ErrorState";
 import EmptyState from "../component/EmptyState";
-import SquareSkeleton from "../component/SquareSkeleton";
 import { useTranslation } from "react-i18next";
 import { pixelFramed } from "../style/pixel";
 
@@ -38,12 +37,13 @@ export default function PokemonPage() {
             alignItems="stretch"
             width={560}
             maxWidth="100%"
+            height={{ xs: 140, sm: 180 }}
           >
             <Skeleton
               variant="rectangular"
               sx={{
                 width: { xs: 130, sm: 200 },
-                height: { xs: 180, sm: 230 },
+                height: "100%",
                 flexShrink: 0,
               }}
             />
@@ -53,22 +53,7 @@ export default function PokemonPage() {
               ))}
             </Stack>
           </Stack>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "repeat(4, minmax(0, 1fr))",
-                sm: "repeat(6, minmax(0, 1fr))",
-              },
-              gap: 1,
-            }}
-            width={560}
-            maxWidth="100%"
-          >
-            {Array.from({ length: 30 }).map((_, i) => (
-              <SquareSkeleton key={i} />
-            ))}
-          </Box>
+          <PokemonBox pokemons={[]} onSelect={() => {}} />
         </Stack>
       </PageContainer>
     );
@@ -108,6 +93,7 @@ export default function PokemonPage() {
           alignItems="stretch"
           width={560}
           maxWidth="100%"
+          height={{ xs: 140, sm: 180 }}
         >
           <Box
             sx={{
