@@ -2,8 +2,9 @@ import { List, ListItem, Skeleton, Stack } from "@mui/material";
 import PokedexListButton from "../component/PokedexListButton";
 import PageContainer from "../component/PageContainer";
 import usePokedex from "../hook/api/usePokedex";
+import usePokemons from "../hook/api/usePokemons";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { PokedexItem } from "../type/pokedex";
 import PokedexPreview from "../component/PokedexPreview";
 import { useTranslation } from "react-i18next";
@@ -14,14 +15,34 @@ import { pixelCard } from "../style/pixel";
 export default function PokedexPage() {
   const { t } = useTranslation();
   const { pokedexItems, fetchPokedex, loading, error } = usePokedex();
+  const { pokemons, loading: pokemonsLoading } = usePokemons();
   const [selectedPokedexItem, setSelectedPokedexItem] =
     useState<PokedexItem | null>(null);
+
+  const shinyTypes = useMemo(
+    () =>
+      new Set(
+        (pokemons ?? [])
+          .filter((pokemon) => pokemon.isShiny)
+          .map((pokemon) => pokemon.id)
+      ),
+    [pokemons]
+  );
+
+  const pokedexItemsWithShiny = useMemo(
+    () =>
+      (pokedexItems ?? []).map((item) => ({
+        ...item,
+        isShinyFound: item.isFound && shinyTypes.has(item.id),
+      })),
+    [pokedexItems, shinyTypes]
+  );
 
   const onSelectPokedexItem = (pokedexItem: PokedexItem) => {
     setSelectedPokedexItem(pokedexItem);
   };
 
-  if (loading) {
+  if (loading || pokemonsLoading) {
     return (
       <PageContainer backgroundTheme="small">
         <Stack
@@ -95,12 +116,13 @@ export default function PokedexPage() {
             padding: 2,
           }}
         >
-          {pokedexItems.map((pokedexItem) => (
+          {pokedexItemsWithShiny.map((pokedexItem) => (
             <ListItem sx={{ width: "100%" }} disablePadding key={pokedexItem.id}>
               <PokedexListButton
                 number={pokedexItem.id}
                 name={t(`pokemon-name.${pokedexItem.id}`)}
                 hasFound={pokedexItem.isFound}
+                hasShiny={pokedexItem.isShinyFound}
                 onClick={() => onSelectPokedexItem(pokedexItem)}
               />
             </ListItem>

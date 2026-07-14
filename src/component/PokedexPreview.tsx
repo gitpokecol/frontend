@@ -8,6 +8,7 @@ import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { pixelFrame } from "../style/pixel";
@@ -25,6 +26,7 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
       : null;
   const [formIdx, setFormIdx] = useState<number>(0);
   const [gender, setGender] = useState<"female" | "male">("male");
+  const [showShiny, setShowShiny] = useState<boolean>(false);
 
   const handleNextForm = () => {
     if (formIdx === forms.length - 1) setFormIdx(0);
@@ -39,6 +41,7 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
   useEffect(() => {
     setFormIdx(0);
     setGender("male");
+    setShowShiny(false);
   }, [pokedexItem]);
 
   return (
@@ -69,12 +72,33 @@ export default function PokedexPreview({ pokedexItem }: PokedexPreviewProps) {
                 internalId: 0,
                 level: 0,
                 id: pokedexItem.id,
-                isShiny: false,
+                isShiny: showShiny && !!pokedexItem.isShinyFound,
                 gender: gender,
                 form: forms ? forms[formIdx] : null,
               }}
               facing="front"
             />
+
+            {pokedexItem.isShinyFound ? (
+              <Stack
+                position="absolute"
+                left={0}
+                top={0}
+                sx={{ background: "#FFFFFF70", borderRadius: 2 }}
+              >
+                <IconButton
+                  aria-label="toggle shiny"
+                  aria-pressed={showShiny}
+                  onClick={() => setShowShiny(!showShiny)}
+                >
+                  <AutoAwesomeIcon
+                    sx={{ fill: showShiny ? "#E6A800" : "#9E9E9E" }}
+                  />
+                </IconButton>
+              </Stack>
+            ) : (
+              <></>
+            )}
 
             {forms ? (
               <Stack

@@ -45,6 +45,7 @@ interface PokedexListButtonProps {
   number: number;
   name: string;
   hasFound: boolean;
+  hasShiny?: boolean;
   onClick?: () => void;
 }
 
@@ -52,6 +53,7 @@ export default function PokedexListButton({
   number,
   name,
   hasFound,
+  hasShiny = false,
   onClick,
 }: PokedexListButtonProps) {
   const numberPart = "#" + number.toString().padStart(3, "0");
@@ -64,7 +66,19 @@ export default function PokedexListButton({
           <Pokeball style={{ maxWidth: 32, minWidth: 24 }} />
           <ListItemText
             sx={{ textAlign: "left" }}
-            primary={`${numberPart} ${name}`}
+            primary={
+              <>
+                {`${numberPart} ${name}`}
+                {hasShiny && (
+                  <span
+                    aria-label="shiny found"
+                    style={{ color: "#E6A800", marginLeft: 6 }}
+                  >
+                    ✦
+                  </span>
+                )}
+              </>
+            }
           />
         </FoundPokedexListButton>
       ) : (
