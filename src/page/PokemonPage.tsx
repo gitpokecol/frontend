@@ -11,7 +11,7 @@ import ErrorState from "../component/ErrorState";
 import EmptyState from "../component/EmptyState";
 import SquareSkeleton from "../component/SquareSkeleton";
 import { useTranslation } from "react-i18next";
-import { pixelFrame } from "../style/pixel";
+import { pixelFramed } from "../style/pixel";
 
 export default function PokemonPage() {
   const { t } = useTranslation();
@@ -111,8 +111,7 @@ export default function PokemonPage() {
         >
           <Box
             sx={{
-              ...pixelFrame,
-              background: pokemonBackgroundColors[selectedPokemon.id],
+              ...pixelFramed(pokemonBackgroundColors[selectedPokemon.id]),
               padding: 1,
             }}
             width={{ xs: 130, sm: 200 }}

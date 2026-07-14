@@ -12,14 +12,25 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pokemon } from "../type/pokemon";
 import PokemonSlot from "./PokemonSlot";
-import { PIXEL_FRAME_LINE, PIXEL_INK, pixelCard } from "../style/pixel";
+import { PIXEL_INK, pixelCard } from "../style/pixel";
 
 const BOX_ROWS = 5;
 
-const wallpaperStyle = {
-  backgroundImage: `conic-gradient(#EAF2FC 90deg, #DFEAF8 90deg 180deg, #EAF2FC 180deg 270deg, #DFEAF8 270deg)`,
+const BOX_THEMES = [
+  { header: "#BFD3EE", wallpaper: ["#EAF2FC", "#DFEAF8"] },
+  { header: "#BFE3C0", wallpaper: ["#EAF8EB", "#DFF0E0"] },
+  { header: "#F2CFAF", wallpaper: ["#FCF2E6", "#F8EAD8"] },
+  { header: "#D8C6EE", wallpaper: ["#F2EAFC", "#EAE0F8"] },
+  { header: "#F2C0CE", wallpaper: ["#FCEAF0", "#F8DEE8"] },
+  { header: "#B8E0DC", wallpaper: ["#E8F8F6", "#DCF0ED"] },
+  { header: "#E8D9A8", wallpaper: ["#FAF4DE", "#F4ECCC"] },
+  { header: "#F0BFBF", wallpaper: ["#FCEAEA", "#F8DEDE"] },
+];
+
+const wallpaperStyle = (colors: string[]) => ({
+  backgroundImage: `conic-gradient(${colors[0]} 90deg, ${colors[1]} 90deg 180deg, ${colors[0]} 180deg 270deg, ${colors[1]} 270deg)`,
   backgroundSize: "24px 24px",
-};
+});
 
 interface PokemonBoxProps {
   pokemons: Pokemon[];
@@ -54,6 +65,8 @@ export default function PokemonBox({
     setBoxIndex((currentBox + 1) % boxCount);
   };
 
+  const theme_ = BOX_THEMES[currentBox % BOX_THEMES.length];
+
   return (
     <Stack sx={pixelCard} width={560} maxWidth="100%">
       <Stack
@@ -61,7 +74,7 @@ export default function PokemonBox({
         alignItems="center"
         justifyContent="space-between"
         sx={{
-          background: PIXEL_FRAME_LINE,
+          background: theme_.header,
           borderBottom: `2px solid ${PIXEL_INK}`,
         }}
         paddingX={0.5}
@@ -86,7 +99,7 @@ export default function PokemonBox({
       </Stack>
       <Box
         sx={{
-          ...wallpaperStyle,
+          ...wallpaperStyle(theme_.wallpaper),
           display: "grid",
           gridTemplateColumns: `repeat(${boxColumns}, minmax(0, 1fr))`,
           gap: 1,
